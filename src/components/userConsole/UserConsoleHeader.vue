@@ -1,65 +1,69 @@
 <template>
-  <div class="header">
-    <div class="header-content">
-        <div class="main-nav">
-          <!-- Logo -->
-          <div class="logo">Penny Pincher</div>
-          <!-- Main navigation -->
-          <div class="nav-buttons">
-            <!-- Logged in navigation -->
-            <!-- <div class="authenticated-nav" v-if="userId">
+  <div>
+    <div class="header">
+      <div class="header-content">
+          <div class="main-nav">
+            <!-- Logo -->
+            <div class="logo">Penny Pincher</div>
+            <!-- Main navigation -->
+            <div class="nav-buttons">
+              <!-- Logged in navigation -->
+              <!-- <div class="authenticated-nav" v-if="userId">
+                <router-link to="/expenses">Expenses</router-link>
+                <div>|</div>
+                <router-link to="/people">People</router-link>
+                <div>|</div>
+                <router-link to="/opportunities">Opportunities</router-link>
+                <div>|</div>
+              </div> -->
               <router-link to="/expenses">Expenses</router-link>
               <div>|</div>
-              <router-link to="/people">People</router-link>
+              <router-link to="/vendors">Vendors</router-link>
               <div>|</div>
-              <router-link to="/opportunities">Opportunities</router-link>
+              <router-link to="/products">Products</router-link>
               <div>|</div>
-            </div> -->
-            <router-link to="/expenses">Expenses</router-link>
-            <div>|</div>
-            <router-link to="/vendors">Vendors</router-link>
-            <div>|</div>
-            <router-link to="/products">Products</router-link>
-            <div>|</div>
-            <router-link to="/shoppinglists">Shopping Lists</router-link>
-            <div>|</div>
-            <router-link to="/recipes">Recipes</router-link>
-            <!-- <div>|</div>
-            <router-link to="/admin">Admin Panel</router-link>
-            <div>|</div>
-            <router-link to="/newusers">New User Accounts</router-link> -->
+              <router-link to="/shoppinglists">Shopping Lists</router-link>
+              <div>|</div>
+              <router-link to="/recipes">Recipes</router-link>
+              <!-- <div>|</div>
+              <router-link to="/admin">Admin Panel</router-link>
+              <div>|</div>
+              <router-link to="/newusers">New User Accounts</router-link> -->
+            </div>
           </div>
-        </div>
-        <!-- Login buttons   -->
-        <div>
+          <!-- Login buttons   -->
           <div>
-            {{user.email}}
-          </div>
-          <button
-            v-if="!authenticated"
-            @click="login()">
-              Log In
-          </button>
+            <div>
+              {{user.email}}
+            </div>
+            <button
+              v-if="!authenticated"
+              @click="login()">
+                Log In
+            </button>
 
-          <button
-            v-if="authenticated"
-            @click="logout()">
-              Log Out
-          </button>
+            <button
+              v-if="authenticated"
+              @click="logout()">
+                Log Out
+            </button>
+          </div>
+      </div>
+      <div class="modalArea">
+        <div v-if="showCreateRecipeModal">
+          <create-recipe/>
         </div>
-    </div>
-    <div class="modalArea">
-      <div v-if="showCreateRecipeModal">
-        <create-recipe/>
-      </div>
-      <div v-if="showCreateShoppingListModal">
-        <create-shopping-list/>
-      </div>
-      <div v-if="showDeleteRecipeModal">
-        <delete-recipe/>
+        <div v-if="showCreateShoppingListModal">
+          <create-shopping-list/>
+        </div>
+        <div v-if="showDeleteRecipeModal">
+          <delete-recipe/>
+        </div>
       </div>
     </div>
-    <router-view></router-view>
+    <div class="main-content">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -173,5 +177,8 @@ export default {
 
 .login a:hover{
   color: gray;
+}
+.main-content {
+  height: auto;
 }
 </style>
