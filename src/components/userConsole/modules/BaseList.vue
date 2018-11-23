@@ -17,7 +17,7 @@
                 @change="update(row)"
                 class="checkbox"
                 type="checkbox">
-              {{`${row.quantity} ${row.template.unit} of ${row.template.name}`}}
+              {{`${row.quantity} ${row.unit} of ${row.template.name} ${row.format}`}}
               <button
                 @click="deleteObject(row)"
               >X</button>

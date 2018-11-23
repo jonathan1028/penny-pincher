@@ -34,7 +34,7 @@ export default {
         {dbField: 'name', title: 'name'},
         {dbField: 'category', title: 'category'},
         {dbField: 'price', title: 'price'},
-        {dbField: 'unit', title: 'unit'},
+        {dbField: 'pricingUnit', title: 'Pricing Unit'},
         {dbField: 'createdAt', title: 'createdAt'}
       ]
     }

@@ -3,13 +3,15 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import store from '../store/index'
 
+// Layouts
 import PublicLayout from '@/components/public/PublicLayout'
+import UserConsoleLayout from '@/components/userConsole/UserConsoleLayout'
+
 import Home from '@/components/public/Home'
 // import Callback from '@/components/public/Callback'
 import SignUp from '@/components/public/SignUp'
 import Login from '@/components/public/Login'
 
-import UserConsoleHeader from '@/components/userConsole/UserConsoleHeader'
 import Expenses from '../components/userConsole/expenses/Expenses'
 import ReadExpense from '../components/userConsole/expenses/ReadExpense'
 import UpdateExpense from '../components/userConsole/expenses/UpdateExpense'
@@ -20,7 +22,7 @@ import ShoppingListsPage from '../components/userConsole/pages/ShoppingListsPage
 import ProductTemplatesPage from '../components/userConsole/pages/ProductTemplatesPage'
 import ProductTemplateUpdatePage from '../components/userConsole/pages/ProductTemplateUpdatePage'
 
-import ReadShoppingListPage from '../components/userConsole/pages/ReadShoppingListPage'
+import ShoppingListPage from '../components/userConsole/pages/ShoppingListPage'
 import RecipesPage from '../components/userConsole/pages/RecipesPage'
 import RecipePage from '../components/userConsole/pages/RecipePage'
 
@@ -83,7 +85,7 @@ const router = new Router({
 
     {
       path: '/',
-      component: UserConsoleHeader,
+      component: UserConsoleLayout,
       children: [
         // ------------------------------------------ Expense ----------------------------------
         {
@@ -124,7 +126,7 @@ const router = new Router({
         },
         {
           path: '/shoppinglist/:id',
-          component: ReadShoppingListPage,
+          component: ShoppingListPage,
           meta: {
             requiresAuth: true
           }

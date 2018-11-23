@@ -43,12 +43,21 @@
         </div>
         <div class="qty">
           <input
-            v-model="quantity"
+            v-model="ingredient.quantity"
             type="text"
             placeholder="Qty">
         </div>
         <div class="unit">
-          {{selected.unit}}
+          <input
+            v-model="ingredient.unit"
+            type="text"
+            placeholder="Unit">
+        </div>
+        <div class="format">
+          <input
+            v-model="ingredient.format"
+            type="text"
+            placeholder="Description">
         </div>
         <button class="_button1"
           @click="addIngredient()"
@@ -62,7 +71,8 @@
           :key='index'
         >
           <div>
-            - {{`${row.quantity} ${row.template.unit}`}} {{row.template.name}}
+            <!-- - {{`${row.quantity}`}} {{row.template.name}} {{row.format}} -->
+            - {{`${row.quantity} ${row.unit}`}} {{row.template.name}} {{row.format}}
             <!-- - {{`${row.quantity} ${row.unit} ${row.name}`}} -->
             <button
               v-if="isEditMode"
@@ -152,7 +162,11 @@ export default {
       newStep: '',
       isEditMode: false,
       selected: '',
-      quantity: null,
+      ingredient: {
+        quantity: 0,
+        unit: '',
+        format: ''
+      },
       Recipe: {
       },
       userId: this.$store.state.auth.userId
@@ -208,11 +222,13 @@ export default {
     addIngredient () {
       console.log('Enter', this.selected)
       let newIngredient = JSON.parse(JSON.stringify(this.selected))
-      newIngredient['quantity'] = parseFloat(this.quantity) || ''
+      newIngredient['quantity'] = parseFloat(this.ingredient.quantity) || 0
       newIngredient['template'] = {
-        unit: this.selected.unit || '',
+        // pricingUnit: this.selected.pricingUnit || '',
         name: this.selected.name || ''
       }
+      newIngredient['format'] = this.ingredient.format || ''
+      newIngredient['unit'] = this.ingredient.unit || ''
       this.Recipe.ingredients.push(newIngredient)
       console.log('New Ingredients', this.Recipe.ingredients)
     },
@@ -236,32 +252,32 @@ export default {
           steps: recipe.steps,
           notes: recipe.notes,
           rating: rating
-        },
-        update: (cache, { data: { updateRecipe } }) => {
-          // Pull data from the stored query
-          console.log('Test, test, test', cache)
-          const data = cache.readQuery({
-            query: MY_RECIPES_QUERY,
-            variables: {
-              ownedById: this.userId
-            }
-          })
-          console.log('Data in store', data)
-          // Delete the current person and replace it with a copay
-          let index = data.allRecipes.findIndex(x => x.id === this.$route.params.id)
-          if (index !== -1) {
-            data.allRecipes[index] = updateRecipe
-          }
-          console.log('Data', data)
-          // We update the cache
-          cache.writeQuery({
-            query: MY_RECIPES_QUERY,
-            variables: {
-              ownedById: this.userId
-            },
-            data: data
-          })
         }
+        // update: (cache, { data: { updateRecipe } }) => {
+        //   // Pull data from the stored query
+        //   console.log('Test, test, test', cache)
+        //   const data = cache.readQuery({
+        //     query: MY_RECIPES_QUERY,
+        //     variables: {
+        //       ownedById: this.userId
+        //     }
+        //   })
+        //   console.log('Data in store', data)
+        //   // Delete the current person and replace it with a copay
+        //   let index = data.allRecipes.findIndex(x => x.id === this.$route.params.id)
+        //   if (index !== -1) {
+        //     data.allRecipes[index] = updateRecipe
+        //   }
+        //   console.log('Data', data)
+        //   // We update the cache
+        //   cache.writeQuery({
+        //     query: MY_RECIPES_QUERY,
+        //     variables: {
+        //       ownedById: this.userId
+        //     },
+        //     data: data
+        //   })
+        // }
       }).catch((error) => {
         console.error(error)
       }).then((result) => {
@@ -275,7 +291,9 @@ export default {
               variables: {
                 templateId: row.id,
                 recipeId: this.$route.params.id,
-                quantity: row.quantity
+                quantity: row.quantity,
+                format: row.format,
+                unit: row.unit
               }
             }).catch((error) => {
               console.error(error)

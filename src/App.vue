@@ -11,6 +11,20 @@ export default {
 </script>
 
 <style lang="scss">
+/* phones */
+@media only screen and (max-width: 767px) {
+  width: 100vw;
+  height: 100vh;
+  * {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+  }
 html {
   background-color: whitesmoke;
   font-family: 'Open Sans', sans-serif;
@@ -99,6 +113,7 @@ input:hover{
 }
 
 button{
+  cursor: pointer;
   margin-bottom: 1%;
   -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
   -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;

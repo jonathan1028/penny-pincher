@@ -19,7 +19,7 @@
         placeholder="">
       <label for="">Unit:</label>
       <input
-        v-model="Product.unit"
+        v-model="Product.pricingUnit"
         type="text"
         placeholder="">
       <button class="_button1"
@@ -42,7 +42,7 @@ export default {
       Product: {
         name: '',
         category: '',
-        unit: '',
+        pricingUnit: '',
         price: null
       }
       // currentUserId: this.$store.state.auth.user.id
@@ -57,7 +57,7 @@ export default {
         variables: {
           name: this.Product.name,
           category: this.Product.category,
-          unit: this.Product.unit,
+          pricingUnit: this.Product.pricingUnit,
           price: price,
           template: true
         },

@@ -1,5 +1,5 @@
 # project: cjmjw62xi3gjh0100nabw430x
-# version: 7
+# version: 9
 
 type User @model {
   id: ID! @isUnique
@@ -95,13 +95,15 @@ type Person @model {
 
 type Product @model {
   createdAt: DateTime!
+  updatedAt: DateTime!
   id: ID! @isUnique
   inCart: Boolean
   quantity: Float
+  format: String
+  unit: String
   recipe: Recipe @relation(name: "ProductsOnRecipe")
   shoppingList: ShoppingList @relation(name: "ProductsOnList")
   template: ProductTemplate @relation(name: "ProductTemplateOnProduct")
-  updatedAt: DateTime!
 }
 
 type ProductTemplate @model {
@@ -111,7 +113,7 @@ type ProductTemplate @model {
   name: String
   price: Float
   products: [Product!]! @relation(name: "ProductTemplateOnProduct")
-  unit: String
+  pricingUnit: String
   updatedAt: DateTime!
 }
 

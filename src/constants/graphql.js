@@ -229,35 +229,35 @@ export const ALL_PRODUCTTEMPLATES_QUERY = gql`
       name
       category
       price
-      unit
+      pricingUnit
     }
   }
 `
 
 export const CREATE_PRODUCTTEMPLATE_MUTATION = gql`
   mutation CreateProductTemplateMutation($name: String, $category: String, $price: Float, 
-  $unit: String) {
+  $pricingUnit: String) {
     createProductTemplate(
       name: $name
       category: $category
       price: $price
-      unit: $unit
+      pricingUnit: $pricingUnit
     ) {
       id
       name
       category
       price
-      unit
+      pricingUnit
     }
   }
 `
 export const UPDATE_PRODUCTTEMPLATE_MUTATION = gql`
-  mutation UpdateProductTemplateMutation($id: ID!, $name: String, $category: String, $unit: String, $price: Float ) {
+  mutation UpdateProductTemplateMutation($id: ID!, $name: String, $category: String, $pricingUnit: String, $price: Float ) {
     updateProductTemplate(
       id: $id
       name: $name
       category: $category
-      unit: $unit
+      pricingUnit: $pricingUnit
       price: $price
     ) {
       id
@@ -282,10 +282,12 @@ export const ALL_PRODUCTS_QUERY = gql`
       id
       inCart
       quantity
+      unit
+      format
       template {
         id
         name
-        unit
+        pricingUnit
         category
         price
       }
@@ -301,10 +303,12 @@ export const MY_PRODUCTS_QUERY = gql`
       id
       inCart
       quantity
+      unit
+      format
       template {
         id
         name
-        unit
+        pricingUnit
         category
         price
       }
@@ -313,20 +317,25 @@ export const MY_PRODUCTS_QUERY = gql`
 `
 
 export const CREATE_PRODUCT_MUTATION = gql`
-  mutation CreateProductMutation($templateId: ID!, $shoppingListId: ID, $recipeId: ID, $quantity: Float) {
+  mutation CreateProductMutation($templateId: ID!, $shoppingListId: ID, $recipeId: ID, $quantity: Float, 
+  $unit: String, $format: String) {
     createProduct(
       templateId: $templateId
       shoppingListId: $shoppingListId
       recipeId: $recipeId
       quantity: $quantity
+      unit: $unit
+      format: $format
     ) {
       id
       quantity
+      unit
+      format
       inCart
       template {
         id
         name
-        unit
+        pricingUnit
         category
         price
       }
@@ -369,10 +378,12 @@ export const ALL_RECIPES_QUERY = gql`
       ingredients {
         id
         quantity
+        unit
+        format
         template {
           id
           name
-          unit
+          pricingUnit
           category
           price
         }
@@ -396,10 +407,12 @@ export const MY_RECIPES_QUERY = gql`
       ingredients {
         id
         quantity
+        unit
+        format
         template {
           id
           name
-          unit
+          pricingUnit
           category
           price
         }
@@ -422,10 +435,12 @@ export const GET_RECIPE_QUERY = gql`
       ingredients {
         id
         quantity
+        unit
+        format
         template {
           id
           name
-          unit
+          pricingUnit
           category
           price
         }
@@ -452,10 +467,12 @@ export const CREATE_RECIPE_MUTATION = gql`
       ingredients {
         id
         quantity
+        unit
+        format
         template {
           id
           name
-          unit
+          pricingUnit
           category
           price
         }
@@ -468,7 +485,8 @@ export const CREATE_RECIPE_MUTATION = gql`
 `
 
 export const UPDATE_RECIPE_MUTATION = gql`
-  mutation UpdateRecipeMutation($id: ID!, $name: String, $steps: [String!], $notes: String, $rating: Float) {
+  mutation UpdateRecipeMutation($id: ID!, $name: String, $steps: [String!], $notes: String,
+   $rating: Float) {
     updateRecipe(
       id: $id,
       name: $name
@@ -484,10 +502,12 @@ export const UPDATE_RECIPE_MUTATION = gql`
       ingredients {
         id
         quantity
+        unit
+        format
         template {
           id
           name
-          unit
+          pricingUnit
           category
           price
         }

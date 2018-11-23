@@ -4,7 +4,6 @@
       <thead>
         <tr>
           <th>
-            Add
           </th>
           <th
             v-for='(item, index) in columns'

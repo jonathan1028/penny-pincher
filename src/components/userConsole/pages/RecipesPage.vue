@@ -1,32 +1,31 @@
 <template>
   <div class="page">
-    <h1>Recipes</h1>
-    <button
-      @click="create"
-    >
-      New Recipe
-    </button>
-    <div>
-      <form class="search">
-        <input name="query" v-model="searchQuery" placeholder="Search">
-      </form>
-      Select Shopping List to Add Recipes To:
-      <div class="v-select">
+      <h1 class="title">Recipes</h1>
+      <button
+        class="create-button"
+        @click="create"
+      >
+        New Recipe
+      </button>
+      <input
+        class="search"
+        name="query" v-model="searchQuery" placeholder="Search">
+      <div class="select-shopping-list">
         <v-select
-          placeholder="Select"
+          placeholder="Add to Shopping List"
           v-model="selected"
           label="name"
           :options="allShoppingLists">
         </v-select>
       </div>
       <recipes-table
+        class="table"
         :data="query"
         :columns="columns"
         :filter-key="searchQuery"
         :shoppingList="selected"
         >
       </recipes-table>
-    </div>
   </div>
 </template>
 
@@ -109,11 +108,35 @@ export default {
 
 <style lang="scss" scoped>
 .page {
+  display: grid;
+  grid-template-areas:
+    "title create-button"
+    "search search"
+    "select-shopping-list select-shopping-list"
+    "table table";
   padding: 3vh;
   background-color: white;
 }
+.title {
+  grid-area: title;
+}
+.create-button {
+  grid-area: create-button;
+  width: 15vw;
+  justify-self: end;
+}
 .search{
+  grid-area: search;
   width: 38%;
+  font-size: 3vh;
+  border: 0.15vh solid lightgray;
+}
+.select-shopping-list {
+  grid-area: select-shopping-list;
+  margin-top: 1vh;
+}
+.table {
+  grid-area: table;
 }
 .adminPage {
   margin: 0vh 5vw;
