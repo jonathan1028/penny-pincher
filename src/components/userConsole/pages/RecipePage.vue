@@ -245,7 +245,6 @@ export default {
               ownedById: this.userId
             }
           })
-       
           console.log('Recipes Query', data)
           // We add the new data
           const index = data.allRecipes.findIndex(x => x.id === this.$route.params.id)
@@ -286,7 +285,6 @@ export default {
           notes: recipe.notes,
           rating: rating
         }
-       
       }).catch((error) => {
         console.error(error)
       })
