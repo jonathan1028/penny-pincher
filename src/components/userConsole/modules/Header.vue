@@ -2,21 +2,23 @@
   <div class="header">
     <!-- Logo -->
     <div class="logo">Penny Pincher</div>
-    <router-link
-      class="link1"
-      to="/products">Products</router-link>
-    <!-- <div>|</div> -->
-    <router-link
-      class="link2"
-      to="/shoppinglists">Shopping</router-link>
-    <!-- <div>|</div> -->
-    <router-link
-      class="link3"
-      to="/recipes">Recipes</router-link>
-    <div class="username">
-      {{user.email}}
+    <div class="links">
+      <router-link
+        class="link1"
+        to="/products">Products</router-link>
+      <!-- <div>|</div> -->
+      <router-link
+        class="link2"
+        to="/shoppinglists">Shopping</router-link>
+      <!-- <div>|</div> -->
+      <router-link
+        class="link3"
+        to="/recipes">Recipes</router-link>
     </div>
     <div class="logout">
+      <div class="username">
+        {{user.email}}
+      </div>
       <button
         v-if="!authenticated"
         @click="login()">
@@ -67,32 +69,65 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// ================= Web Styles ===========
+.header {
+  padding: 1vh 2vw;
+    display: grid;
+    grid-template-areas:
+      "logo links logout";
+    grid-template-rows: auto;
+    grid-template-columns: 27vw 41vw 27vw;
+    .logo {
+      grid-area: logo;
+      // border: 1px solid black;
+    }
+    .links {
+      grid-area: links;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-content: center;
+      // border: 1px solid black;
+      justify-self: center;
+    }
+    .logout {
+      display: flex;
+      grid-area: logout;
+      align-items: center;
+      // border: 1px solid black;
+      justify-self: end;
+      button {
+        font-size: 2vh;
+        margin-left: 1vw;
+      }
+    }
+    .username {
+      // display: none;
+      // border: 1px solid black;
+    }
+  }
 /* phones */
 @media only screen and (max-width: 767px) {
   .header {
     display: grid;
     grid-template-areas:
-      "logo link1 link2 link3 logout";
-    grid-template-rows: auto;
-    grid-template-columns: 20vw 20vw 20vw 20vw 20vw;
+      "logo  logout"
+      "links links";
+    grid-template-rows: auto auto;
+    grid-template-columns: 80vw 16vw;
     .logo {
       grid-area: logo;
       // border: 1px solid black;
     }
-    .link1 {
-      grid-area: link1;
-      // border: 1px solid black;
-    }
-    .link2 {
-      grid-area: link2;
-      // border: 1px solid black;
-    }
-    .link3 {
-      grid-area: link3;
+    .links {
+      grid-area: links;
       // border: 1px solid black;
     }
     .logout {
       grid-area: logout;
+      .username {
+        display: none;
+      }
       // border: 1px solid black;
       justify-self: end;
       button {
@@ -105,41 +140,4 @@ export default {
     }
   }
 }
-.header {
-  padding: 1vh 2vw;
-    display: grid;
-    grid-template-areas:
-      "logo link1 link2 link3 logout";
-    grid-template-rows: auto;
-    grid-template-columns: 18vw 20vw 20vw 20vw 18vw;
-    .logo {
-      grid-area: logo;
-      // border: 1px solid black;
-    }
-    .link1 {
-      grid-area: link1;
-      // border: 1px solid black;
-    }
-    .link2 {
-      grid-area: link2;
-      // border: 1px solid black;
-    }
-    .link3 {
-      grid-area: link3;
-      // border: 1px solid black;
-    }
-    .logout {
-      grid-area: logout;
-      // border: 1px solid black;
-      justify-self: end;
-      button {
-        font-size: 2vh;
-      }
-    }
-    .username {
-      // display: none;
-      // border: 1px solid black;
-    }
-  }
-
 </style>

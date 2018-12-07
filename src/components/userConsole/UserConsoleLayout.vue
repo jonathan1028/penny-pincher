@@ -61,6 +61,10 @@ export default {
 </script>
 
 <style lang="scss">
+.layout {
+  display: grid;
+  grid-template-rows: auto auto;
+}
 // .header{
 //   /* position: fixed; */
 //   width: 100%;

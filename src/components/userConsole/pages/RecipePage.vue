@@ -26,14 +26,16 @@
       <input
         v-model="Recipe.rating"
         type="number"
-        placeholder="">
+        placeholder=""
+        @change="update(Recipe)"
+        >
     </div>
     <div>
       <div>Ingredients:</div>
       <div
-        class="container"
+        class="add-ingredient"
         v-if="isEditMode">
-        <div class="v-select">
+        <div class="product-name">
           <v-select
             placeholder="Add Ingredient"
             v-model="selected"
@@ -48,16 +50,18 @@
             placeholder="Qty">
         </div>
         <div class="unit">
-          <input
+          <v-select
+            placeholder="Unit"
             v-model="ingredient.unit"
-            type="text"
-            placeholder="Unit">
+            label="name"
+            :options="unitOptions">
+          </v-select>
         </div>
-        <div class="format">
+        <div class="details">
           <input
             v-model="ingredient.format"
             type="text"
-            placeholder="Description">
+            placeholder="Details">
         </div>
         <button class="_button1"
           @click="addIngredient()"
@@ -118,7 +122,9 @@
           v-model="Recipe.notes"
           rows="10"
           columns="40"
-          placeholder="">
+          placeholder=""
+          @change="update(Recipe)"
+          >
         </textarea>
       </div>
       <div v-if="!isEditMode">
@@ -169,8 +175,8 @@ export default {
       },
       Recipe: {
       },
-      userId: this.$store.state.auth.userId
-      // unit: ''
+      userId: this.$store.state.auth.userId,
+      unitOptions: ['pinch', 'tsp', 'tbsp', 'fl oz', 'cup', 'pt', 'qt', 'gal', 'oz', 'lb']
     }
   },
   apollo: {
@@ -218,21 +224,48 @@ export default {
     add () {
       this.Recipe.steps.push(this.newStep)
       this.newStep = ''
+      this.update()
     },
     addIngredient () {
-      console.log('Enter', this.selected)
-      let newIngredient = JSON.parse(JSON.stringify(this.selected))
-      newIngredient['quantity'] = parseFloat(this.ingredient.quantity) || 0
-      newIngredient['template'] = {
-        // pricingUnit: this.selected.pricingUnit || '',
-        name: this.selected.name || ''
-      }
-      newIngredient['format'] = this.ingredient.format || ''
-      newIngredient['unit'] = this.ingredient.unit || ''
-      this.Recipe.ingredients.push(newIngredient)
-      console.log('New Ingredients', this.Recipe.ingredients)
+      this.$apollo.mutate({
+        mutation: CREATE_PRODUCT_MUTATION,
+        variables: {
+          templateId: this.selected.id,
+          recipeId: this.$route.params.id,
+          quantity: parseFloat(this.ingredient.quantity) || 0,
+          format: this.ingredient.format || '',
+          unit: this.ingredient.unit || ''
+        },
+        update: (store, { data: { createProduct } }) => {
+          // Pull data from the stored query
+          // console.log('Store from CreateREcipe', store)
+          const data = store.readQuery({
+            query: MY_RECIPES_QUERY,
+            variables: {
+              ownedById: this.userId
+            }
+          })
+       
+          console.log('Recipes Query', data)
+          // We add the new data
+          const index = data.allRecipes.findIndex(x => x.id === this.$route.params.id)
+          if (index !== -1) {
+            data.allRecipes[index].ingredients.push(createProduct)
+          }
+          console.log('Test', data)
+          // We update the cache
+          store.writeQuery({
+            query: MY_RECIPES_QUERY,
+            data: data
+          })
+          this.ingredient = {}
+          this.selected = ''
+        }
+      }).catch((error) => {
+        console.error(error)
+      })
     },
-    save () {
+    update () {
       let rating = parseFloat(this.Recipe.rating)
       let recipe = {
         id: this.$route.params.id,
@@ -253,54 +286,12 @@ export default {
           notes: recipe.notes,
           rating: rating
         }
-        // update: (cache, { data: { updateRecipe } }) => {
-        //   // Pull data from the stored query
-        //   console.log('Test, test, test', cache)
-        //   const data = cache.readQuery({
-        //     query: MY_RECIPES_QUERY,
-        //     variables: {
-        //       ownedById: this.userId
-        //     }
-        //   })
-        //   console.log('Data in store', data)
-        //   // Delete the current person and replace it with a copay
-        //   let index = data.allRecipes.findIndex(x => x.id === this.$route.params.id)
-        //   if (index !== -1) {
-        //     data.allRecipes[index] = updateRecipe
-        //   }
-        //   console.log('Data', data)
-        //   // We update the cache
-        //   cache.writeQuery({
-        //     query: MY_RECIPES_QUERY,
-        //     variables: {
-        //       ownedById: this.userId
-        //     },
-        //     data: data
-        //   })
-        // }
+       
       }).catch((error) => {
         console.error(error)
-      }).then((result) => {
-        // Clone product from ingredients list
-        // Attach Product to Recipe
-        // console.log('Ingredients after recipe creation', this.ingredients)
-        this.Recipe.ingredients.forEach((row) => {
-          if (row.__typename === 'ProductTemplate') {
-            this.$apollo.mutate({
-              mutation: CREATE_PRODUCT_MUTATION,
-              variables: {
-                templateId: row.id,
-                recipeId: this.$route.params.id,
-                quantity: row.quantity,
-                format: row.format,
-                unit: row.unit
-              }
-            }).catch((error) => {
-              console.error(error)
-            })
-          }
-        })
       })
+    },
+    save () {
       apolloClient.writeData({ data: { isEditMode: false } })
     },
     deleteIngredient (row) {
@@ -334,10 +325,10 @@ export default {
   display: flex;
   align-items: flex-end
 }
-.container {
+.add-ingredient {
   border: 1px solid lightgray;
   display: grid;
-  width: 100%;
+  width: 90vw;
   margin: 0px;
   padding: 0px;
   grid-template-columns: 60% 15% 15% 10%;
@@ -358,7 +349,7 @@ export default {
       width: 100%;
     }
   }
-  .v-select {
+  .product-name {
     // border: 1px solid black;
     // height: 2.5vh;
     font-size: 2vh;
@@ -367,5 +358,77 @@ export default {
   button {
     font-size: 3vh;
   }
+}
+// =================== Mobile ==================
+/* phones */
+@media only screen and (max-width: 767px) {
+.add-ingredient {
+  border: 1px solid red;
+  // border: 1px solid lightgray;
+  display: grid;
+  grid-template-columns: 20vw 50vw 20vw;
+  grid-template-rows: 5vh 5vh 5vh 5vh;
+  grid-template-areas:
+   "product-name product-name product-name "
+   "qty unit unit"
+   "details details details";
+  // width: 100%;
+  // margin: 0px;
+  // padding: 0px;
+  // grid-template-columns: 60% 15% 15% 10%;
+  .product-name {
+    grid-area: product-name;
+    // width: 30vw;
+  }
+  .qty {
+    grid-area: qty;
+  }
+  .unit {
+    grid-area: unit;
+    font-size: 2vh;
+    // width: 50vw;
+    // border: 1px solid black;
+    margin: 0px;
+    .v-select {
+      width: 100%;
+    }
+  }
+  .details {
+    grid-area: details;
+    width: 100%;
+    border: 1px solid lightgray;
+    // background-color: blue;
+    input {
+      height: 100%;
+      width: 100%;
+    }
+  }
+  // .unit {
+  //   // width: 10%
+  //   // border: 1px solid black;
+  //   display: flex;
+  //   align-items: center;
+  //   margin-left: 1vw;
+  //   font-size: 2vh;
+  // }
+  // .qty {
+  //   // border: 1px solid black;
+  //   input {
+  //     padding-left: 0.5vw;
+  //     height: 4vh;
+  //     font-size: 2vh;
+  //     width: 100%;
+  //   }
+  // }
+  // .v-select {
+  //   // border: 1px solid black;
+  //   // height: 2.5vh;
+  //   font-size: 2vh;
+  //   // margin-left: 1vw;
+  // }
+  // button {
+  //   font-size: 3vh;
+  // }
+}
 }
 </style>
