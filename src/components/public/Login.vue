@@ -1,7 +1,7 @@
 
 <template>
-  <div class="_box loginContainer">
-    <div class="companyName">Good Citizen Network</div>
+  <div class="_card loginContainer">
+    <div class="companyName">Penny Pincher</div>
     <div class="inputs">
       <div class="field">
         <label for="">Username</label>
@@ -34,8 +34,8 @@
       </button>
     </div>
     <div>or</div>
-    <button class="_button3">LOGIN WITH FACEBOOK</button>
-    <button class="_button3">LOGIN WITH GOOGLE</button>
+    <!-- <button class="_button3">LOGIN WITH FACEBOOK</button> -->
+    <!-- <button class="_button3">LOGIN WITH GOOGLE</button> -->
     <div class="linkBlock">
       <router-link
         class="link"
@@ -44,14 +44,14 @@
         Don't have an account? Sign Up
       </router-link>
     </div>
-    <div class="linkBlock">
+    <!-- <div class="linkBlock">
       <router-link
         class="link"
         to="organization/signup"
       >
         Have an organization that you want to setup? Organization Sign Up
       </router-link>
-    </div>
+    </div> -->
   </div>
 </template>
 

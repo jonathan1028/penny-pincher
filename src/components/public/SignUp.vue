@@ -1,34 +1,34 @@
 <template>
   <div class="component">
-    <div class="companyName">Good Citizen Network</div>
+    <div class="companyName">Penny Pincher</div>
     <div class="inputs">
       <div class="field">
         <label for="">Email</label>
         <input
           v-model="email"
           type="text"
-          placeholder="Email">
+          placeholder="">
       </div>
       <div class="field">
         <label for="">First Name</label>
         <input
           v-model="firstName"
           type="text"
-          placeholder="Good">
+          placeholder="">
       </div>
       <div class="field">
         <label for="">Last Name</label>
         <input
           v-model="lastName"
           type="text"
-          placeholder="Citizen">
+          placeholder="">
       </div>
       <div class="field">
         <label for="">Password</label>
         <input
           v-model="password"
           type="password"
-          placeholder="Password">
+          placeholder="">
       </div>
     </div>
     <div>

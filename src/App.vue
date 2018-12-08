@@ -63,7 +63,7 @@ html {
   // overflow-y: auto;
 }
 
-.box {
+._card {
   background-color: white;
   margin-top: 1%;
   padding: 1%;

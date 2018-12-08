@@ -63,7 +63,13 @@ export default {
 <style lang="scss">
 .layout {
   display: grid;
-  grid-template-rows: auto auto;
+  grid-template-rows: 5vh auto;
+}
+@media only screen and (max-width: 767px) {
+  .layout {
+  display: grid;
+  grid-template-rows: 10vh auto;
+}
 }
 // .header{
 //   /* position: fixed; */

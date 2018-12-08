@@ -1,9 +1,9 @@
 <template>
-  <div class="header">
-    <div class="header-content">
+  <div class="layout">
+    <div class="header">
         <div class="main-nav">
           <!-- Logo -->
-          <div class="logo">GCN</div>
+          <div class="logo">Penny Pincher</div>
           <!-- Main navigation -->
           <div class="nav-buttons">
             <!-- <router-link to="/admin">About</router-link>
@@ -39,21 +39,21 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+.layout{
+  display: grid;
+  grid-template-rows: 5vh auto;
+  width: 100vw;
+}
 .header{
-  position: fixed;
-  width: 100%;
-  height: 40px;
+  width: 96vw;
   background-color: white;
-  top: 0;
+  // top: 0;
   -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
   -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
   box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-}
-.header-content{
-  max-width: 90%;
-  height: 100%;
   margin: 0 auto;
+  padding: 2vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
