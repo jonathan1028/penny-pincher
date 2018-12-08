@@ -24,7 +24,7 @@ import CreateRecipe from './modals/CreateRecipe'
 import CreateShoppingList from './modals/CreateShoppingList'
 import DeleteRecipe from './modals/DeleteRecipe'
 import gql from 'graphql-tag'
-import UserConsoleHeader from './modules/header'
+import UserConsoleHeader from './modules/Header'
 
 export default {
   name: 'UserConsoleLayout',
