@@ -114,7 +114,6 @@ export default {
     "search search"
     "select-shopping-list select-shopping-list"
     "table table";
-  padding: 3vh;
   background-color: white;
 }
 .title {

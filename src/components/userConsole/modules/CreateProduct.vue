@@ -7,21 +7,31 @@
         v-model="Product.name"
         type="text"
         placeholder="">
-      <label for="">Category:</label>
-      <input
-        v-model="Product.category"
-        type="text"
-        placeholder="">
+      <!-- <label for="">Category:</label> -->
+      <v-select
+          placeholder="Category"
+          v-model="Product.category"
+          label="name"
+          :options="categoryOptions">
+        </v-select>
       <label for="">Price:</label>
       <input
         v-model="Product.price"
         type="text"
         placeholder="">
-      <label for="">Unit:</label>
-      <input
+      <!-- <label for="">Pricing Unit:</label> -->
+      <!-- <div class="unit"> -->
+        <v-select
+          placeholder="Pricing Unit"
+          v-model="Product.pricingUnit"
+          label="name"
+          :options="unitOptions">
+        </v-select>
+      <!-- </div> -->
+      <!-- <input
         v-model="Product.pricingUnit"
         type="text"
-        placeholder="">
+        placeholder=""> -->
       <button class="_button1"
         @click="submit()"
       >
@@ -33,9 +43,13 @@
 
 <script>
 import { CREATE_PRODUCTTEMPLATE_MUTATION, ALL_PRODUCTTEMPLATES_QUERY } from '../../../constants/graphql'
+import vSelect from 'vue-select'
 
 export default {
   name: 'CreateProduct',
+  components: {
+    vSelect
+  },
   data () {
     return {
       User: {},
@@ -44,7 +58,10 @@ export default {
         category: '',
         pricingUnit: '',
         price: null
-      }
+      },
+      unitOptions: ['pinch', 'tsp', 'tbsp', 'fl oz', 'cup', 'pt', 'qt', 'gal', 'oz', 'lb'],
+      categoryOptions: ['Produce', 'Meat', 'Seafood', 'Dairy', 'Bakery', 'Frozen Food', 'Beverages',
+      'Baking Goods', 'Packaged Goods', 'Condiments']
       // currentUserId: this.$store.state.auth.user.id
     }
   },

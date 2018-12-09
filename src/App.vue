@@ -11,29 +11,23 @@ export default {
 </script>
 
 <style lang="scss">
-/* phones */
-@media only screen and (max-width: 767px) {
-  width: 100vw;
-  height: 100vh;
-  * {
-    margin: 0;
-    padding: 0;
-  }
-}
-
 * {
-    margin: 0;
-    padding: 0;
-  }
+  margin: 0px;
+  padding: 0px;
+}
 html {
   background-color: whitesmoke;
   font-family: 'Open Sans', sans-serif;
+  max-width: 100vw;
+  margin: 0px;
+  padding: 0px;
 }
 
 /* ------------------------- Application Variables ------------------------- */
 :root {
   --page-height: 100vh;
   --page-width: 100vw;
+  --page-padding-width: 4vw;
 
   --font-color1: #47535e;
   --font-color3: #f7ca44;
@@ -55,16 +49,18 @@ html {
   --shadow1: 0 .5vh 2vh rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
   --shadow2: 1.5vh -1vh 1vh rgba(0, 0, 0, 0.3);
   --text-color1: #47535d;
+
+
 }
 
 #app {
-  max-height: 100vh;
+  // max-height: 100vh;
   // max-width: 90%;
   // overflow-y: auto;
 }
 
 ._page {
-  padding: 3vh 3vw;
+  padding: 3vh var(--page-padding-width);
   background-color: white;
   width: 70vw;
   margin: 1vh auto;
@@ -144,8 +140,11 @@ button:hover{
 }
 // ================================================ Mobile Styles ========================================
 @media only screen and (max-width: 767px) {
+// width: 93%;
+// height: 100vh;
 ._page {
-  // width: 80vw;
+  width: calc(100vw - 2 * var(--page-padding-width));
+  height: 90vh;
   margin: none;
 }
 }

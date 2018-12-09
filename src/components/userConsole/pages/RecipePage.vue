@@ -468,7 +468,7 @@ export default {
 @media only screen and (max-width: 767px) {
 .recipe-page {
   display: grid;
-  width: 94vw;
+  // width: 94vw;
   grid-template-areas:
     "page-header page-header"
     "rating      rating"

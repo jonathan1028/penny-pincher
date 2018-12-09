@@ -71,12 +71,12 @@ export default {
 <style lang="scss" scoped>
 // ================= Web Styles ===========
 .header {
-  padding: 1vh 2vw;
+    padding: 1vh 2vw;
     display: grid;
     grid-template-areas:
       "logo links logout";
     grid-template-rows: auto;
-    grid-template-columns: 27vw 41vw 27vw;
+    grid-template-columns: auto auto auto;
     .logo {
       grid-area: logo;
       // border: 1px solid black;
@@ -106,15 +106,16 @@ export default {
       // border: 1px solid black;
     }
   }
-/* phones */
+// ================= Mobile Styles ===========
 @media only screen and (max-width: 767px) {
   .header {
+    padding: 1vh 3vw;
     display: grid;
     grid-template-areas:
       "logo  logout"
       "links links";
     grid-template-rows: auto auto;
-    grid-template-columns: 80vw 16vw;
+    grid-template-columns: auto auto;
     .logo {
       grid-area: logo;
       // border: 1px solid black;

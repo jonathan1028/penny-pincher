@@ -24,7 +24,7 @@
         >
       </div>
       <div class="field">
-        <label>Unit</label>
+        <label>Pricing Unit</label>
         <input
           v-model="product.unit"
           type="text"
