@@ -64,6 +64,10 @@ html {
   background-color: white;
   width: 70vw;
   margin: 1vh auto;
+  h1 {
+    font-size: 6vmin;
+    margin-bottom: 1vh;
+  }
 }
 
 ._card {
@@ -76,6 +80,9 @@ html {
   -moz-box-shadow: 0 2px 1px #777;
   box-shadow: 0 2px 1px #777;
 
+}
+._search {
+  font-size: 2.5vmin;
 }
 form{
   padding: 0px;
@@ -110,7 +117,7 @@ input{
 }
 
 input:hover{
-  border: .5px solid gray;
+  // border: .5px solid gray;
 
 }
 

@@ -2,10 +2,13 @@
   <div class="_page">
     <h1>Products</h1>
     <div>
-      <create-product></create-product>
-      <form class="search">
-        <input name="query" v-model="searchQuery" placeholder="Search">
-      </form>
+      <input 
+        class="_search"
+        name="query" v-model="searchQuery" placeholder="Search">
+      <div class="row">
+        <div class="label">Add Product:</div>
+        <create-product></create-product>
+      </div>
       <product-templates-table
         :data="query"
         :columns="columns"
@@ -58,10 +61,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.search{
-  width: 38%;
-}
-.adminPage {
-  margin: 0vh 5vw;
+.row {
+  font-size: 4vmin;
+  display: grid;
+  grid-template-columns: max-content auto;
+  align-items: center;
+  margin-top: 2vh;
+  .label {
+    margin-right: 1vw;
+  }
 }
 </style>

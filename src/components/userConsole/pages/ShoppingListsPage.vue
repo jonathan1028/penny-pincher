@@ -7,7 +7,7 @@
         + New Shopping List
       </button>
       <input
-        class="search"
+        class="_search"
         name="query" v-model="searchQuery" placeholder="Search">
       <base-table
         class="table"
@@ -68,7 +68,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.page {
+.shopping-lists-page {
   display: grid;
   grid-template-areas:
     "title create-button"
@@ -86,9 +86,6 @@ export default {
 }
 .search{
   grid-area: search;
-  width: 38%;
-  font-size: 3vh;
-  border: 0.15vh solid lightgray;
 }
 .select-shopping-list {
   grid-area: select-shopping-list;

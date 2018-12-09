@@ -1,27 +1,31 @@
 <template>
-  <div class="modal">
-    <h2>Add Product</h2>
-    <div class="field">
-      <label for="">Name:</label>
+  <div class="add-product">
+    <!-- <h2>Add Product</h2> -->
+    <!-- <div class="container"> -->
+      <!-- <label for="">Name:</label> -->
       <input
+        class="product-name"
         v-model="Product.name"
         type="text"
-        placeholder="">
+        placeholder="Name">
       <!-- <label for="">Category:</label> -->
       <v-select
-          placeholder="Category"
-          v-model="Product.category"
-          label="name"
-          :options="categoryOptions">
-        </v-select>
-      <label for="">Price:</label>
+        class="category"
+        placeholder="Category"
+        v-model="Product.category"
+        label="name"
+        :options="categoryOptions">
+      </v-select>
+      <!-- <label for="">Price:</label> -->
       <input
+        class="price"
         v-model="Product.price"
         type="text"
-        placeholder="">
+        placeholder="Price">
       <!-- <label for="">Pricing Unit:</label> -->
       <!-- <div class="unit"> -->
         <v-select
+          class="pricing-unit"
           placeholder="Pricing Unit"
           v-model="Product.pricingUnit"
           label="name"
@@ -37,7 +41,7 @@
       >
         +
       </button>
-    </div>
+    <!-- </div> -->
   </div>
 </template>
 
@@ -103,6 +107,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.add-product {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 30% 20% 10% 20% 20%;
+  grid-template-areas:
+    "product-name category"
+    "price pricing-unit";
+  font-size: 2vmin;
+  border: 1px solid lightgray;
+  input { 
+    font-size: inherit;
+    padding: 0.8vh 0vw 0.8vh 0.5vw;
+  }
+  .name {
+    grid-area: product-name;
+    background-color: pink;
+  }
+  .category {
+    grid-area: category;
+    font-size: inherit;
+  }
+}
 .field {
   margin-top: 2vh;
 }

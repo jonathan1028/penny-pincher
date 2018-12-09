@@ -8,7 +8,7 @@
         New Recipe
       </button>
       <input
-        class="search"
+        class="_search"
         name="query" v-model="searchQuery" placeholder="Search">
       <div class="select-shopping-list">
         <v-select
@@ -126,9 +126,6 @@ export default {
 }
 .search{
   grid-area: search;
-  width: 38%;
-  font-size: 3vh;
-  border: 0.15vh solid lightgray;
 }
 .select-shopping-list {
   grid-area: select-shopping-list;
