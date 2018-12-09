@@ -67,8 +67,15 @@ export default {
   grid-template-columns: max-content auto;
   align-items: center;
   margin-top: 2vh;
+  margin-bottom: 1vh;
   .label {
     margin-right: 1vw;
   }
+}
+// ================================================ Mobile Styles ========================================
+@media only screen and (max-width: 767px) {
+.row {
+  grid-template-columns: 1fr;
+}
 }
 </style>

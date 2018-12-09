@@ -37,26 +37,6 @@ html {
   --background-color2: white;
   --background-color3: #555;
   --background-color4: #e7e9ea;
-
-  --theme-color1: #f7ca44;
-  --theme-color2: #fff2c7;
-  --theme-color3: #47535d;
-  --theme-color4: lightgray;
-  --theme-color5: #e7e9ea;
-  --color2: rgb(42, 177, 182);
-  --link-color: rgb(48,62,240);
-  --shadow3: 1.5vh -1vh 1vh rgba(0, 7, 2, 0.3);
-  --shadow1: 0 .5vh 2vh rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-  --shadow2: 1.5vh -1vh 1vh rgba(0, 0, 0, 0.3);
-  --text-color1: #47535d;
-
-
-}
-
-#app {
-  // max-height: 100vh;
-  // max-width: 90%;
-  // overflow-y: auto;
 }
 
 ._page {
@@ -83,6 +63,8 @@ html {
 }
 ._search {
   font-size: 2.5vmin;
+  border-bottom: 0.15vh solid lightgray;
+  width: 20vw;
 }
 form{
   padding: 0px;
@@ -152,7 +134,7 @@ button:hover{
 ._page {
   width: calc(100vw - 2 * var(--page-padding-width));
   height: 90vh;
-  margin: none;
+  margin-top: 0vh;
 }
 }
 </style>

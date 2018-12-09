@@ -112,24 +112,44 @@ export default {
   display: grid;
   grid-template-columns: 30% 20% 10% 20% 20%;
   grid-template-areas:
-    "product-name category"
-    "price pricing-unit";
+    "product-name category price pricing-unit";
   font-size: 2vmin;
   border: 1px solid lightgray;
   input { 
     font-size: inherit;
     padding: 0.8vh 0vw 0.8vh 0.5vw;
   }
-  .name {
+  .product-name {
     grid-area: product-name;
-    background-color: pink;
+    // background-color: pink;
   }
   .category {
     grid-area: category;
     font-size: inherit;
   }
+  .price {
+    grid-area: price;
+  }
+  .pricing-unit {
+    grid-area: pricing-unit;
+  }
 }
 .field {
   margin-top: 2vh;
+}
+// ================================================ Mobile Styles ========================================
+@media only screen and (max-width: 767px) {
+.add-product { 
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-areas:
+    "product-name  product-name category"
+    "price pricing-unit .";
+  .product-name {
+    border-bottom: 0.15vh solid lightgray;
+    border-top: 0vh solid lightgray;
+    border-left: 0vh solid lightgray;
+    border-right: 0vh solid lightgray;
+  }
+}
 }
 </style>
