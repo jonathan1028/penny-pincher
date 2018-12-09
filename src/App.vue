@@ -63,9 +63,15 @@ html {
   // overflow-y: auto;
 }
 
+._page {
+  padding: 3vh;
+  background-color: white;
+  width: 70vw;
+  margin: 1vh auto;
+}
+
 ._card {
   background-color: white;
-  margin-top: 1%;
   padding: 1%;
   border: 1px solid #BFBFBF;
   background-color: white;
@@ -126,7 +132,6 @@ button:hover{
   -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
   box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
 }
-
 ._box-shadow1 {
   -webkit-box-shadow: 0 .25vh 1vh #777;
   -moz-box-shadow: 0 .25vh 1vh #777;
@@ -136,5 +141,14 @@ button:hover{
   -webkit-box-shadow: 0 .25vh 1vh #777;
   -moz-box-shadow: 0 .25vh 1vh #777;
   box-shadow: 0 .25vh 1vh #777;
+}
+// ================================================ Mobile Styles ========================================
+@media only screen and (max-width: 767px) {
+._page {
+  padding: 3vh;
+  background-color: white;
+  // width: 80vw;
+  margin: none;
+}
 }
 </style>

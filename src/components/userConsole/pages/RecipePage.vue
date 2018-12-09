@@ -1,37 +1,42 @@
 <template>
-  <div class="page">
-    <div class="field">
-      <span v-if="!isEditMode">
-        <h1>{{Recipe.name}}</h1>
-      </span>
-      <span v-if="isEditMode">
-        <h1>
-          <div class="name">
-            <input
-              v-model="Recipe.name"
-              type="text"
-              placeholder="Recipe Name">
-          </div>
-        </h1>
-      </span>
-    </div>
-    <button
-      @click="toggleEditMode"
-    >
-    <span v-if="isEditMode">View</span>
-    <span v-if="!isEditMode">Edit</span>
-    </button>
-    <div>Rating: <span v-if="!isEditMode">{{Recipe.rating}}</span></div>
-    <div v-if="isEditMode">
-      <input
-        v-model="Recipe.rating"
-        type="number"
-        placeholder=""
-        @change="update(Recipe)"
+  <div class="_page recipe-page">
+    <div class="page-header">
+      <div class="page-title">
+        <span v-if="!isEditMode">{{Recipe.name}}</span>
+        <span v-if="isEditMode">
+          <input
+            v-model="Recipe.name"
+            type="text"
+            placeholder="Recipe Name">
+        </span>
+      </div>
+      <div class="toggle-button">
+        <button
+          @click="toggleEditMode"
         >
+          <span v-if="isEditMode">View</span>
+          <span v-if="!isEditMode">Edit</span>
+        </button>
+      </div>
     </div>
-    <div>
-      <div>Ingredients:</div>
+    <div class="rating section-title">
+      <div>Rating:
+        <span v-if="!isEditMode">{{Recipe.rating}}</span>
+        <span v-if="isEditMode">
+          <input
+            v-model="Recipe.rating"
+            type="number"
+            placeholder=""
+            @change="update(Recipe)"
+            >
+        </span>
+      </div>
+    </div>
+    <div class="recipe-photo section">
+        <img class="recipe-photo" src="../../../assets/logo.png"/>
+      </div>
+    <div class="ingredients section">
+      <div class="ingredients-title section-title">Ingredients:</div>
       <div
         class="add-ingredient"
         v-if="isEditMode">
@@ -69,25 +74,25 @@
           +
         </button>
       </div>
-      <ul>
-        <div
-          v-for='(row, index) in Recipe.ingredients'
-          :key='index'
-        >
+      <div
+        class="ingredients-list"
+        v-for='(row, index) in Recipe.ingredients'
+        :key='index'
+      >
+        <li>
+          <icon class="bullet" :icon="['far', 'lemon']"/>
           <div>
-            <!-- - {{`${row.quantity}`}} {{row.template.name}} {{row.format}} -->
-            - {{`${row.quantity} ${row.unit}`}} {{row.template.name}} {{row.format}}
-            <!-- - {{`${row.quantity} ${row.unit} ${row.name}`}} -->
+            {{`${row.quantity} ${row.unit}`}} {{row.template.name}} {{row.format}}
             <button
               v-if="isEditMode"
               @click="deleteIngredient(row)"
             >X</button>
           </div>
-        </div>
-      </ul>
+        </li>
+      </div>
     </div>
-    <div>
-      <div>Steps:</div>
+    <div class="steps section">
+      <div class="section-title">Steps:</div>
       <div v-if="isEditMode">
         <input
           v-model="newStep"
@@ -99,24 +104,25 @@
           + Add
         </button>
       </div>
-      <ul>
-        <div
-          v-for='(row, index) in Recipe.steps'
-          :key='index'
-        >
+      <div
+        class="steps-list"
+        v-for='(row, index) in Recipe.steps'
+        :key='index'
+      >
+        <li>
+          <icon class="bullet" icon="utensils"/>
           <div>
-            - {{row}}
+            {{row}}
             <button
               v-if="isEditMode"
               @click="deleteStep(row)"
             >X</button>
-            <!-- - {{`${row.quantity} ${row.unit} ${row.name}`}} -->
           </div>
-        </div>
-      </ul>
+        </li>
+      </div>
     </div>
-    <div>
-      <div>Notes:</div>
+    <div class="notes section">
+      <div class="section-title">Notes:</div>
       <div v-if="isEditMode">
         <textarea
           v-model="Recipe.notes"
@@ -127,7 +133,9 @@
           >
         </textarea>
       </div>
-      <div v-if="!isEditMode">
+      <div
+        class="notes-list"
+        v-if="!isEditMode">
         {{Recipe.notes}}
       </div>
     </div>
@@ -315,13 +323,111 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.page {
-  padding: 3vh;
-  background-color: white;
+.section {
+  margin: 2vh 0vw;
+  .section-title {
+    font-weight: 900;
+  }
 }
-.field {
-  display: flex;
-  align-items: flex-end
+.recipe-page {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-areas:
+    "page-header page-header"
+    "rating      rating"
+    "ingredients recipe-photo"
+    "steps steps"
+    "notes notes";
+  .page-header {
+    grid-area: page-header;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .page-title {
+      font-size: 8vmin;
+      input {
+        font-size: 8vmin;
+      }
+    }
+    button {
+      font-size: 4vmin;
+      padding: 1vh 1vw;
+    }
+  }
+  .rating {
+    grid-area: rating;
+  }
+  .recipe-photo {
+    grid-area: recipe-photo;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    border: 1px solid pink;
+  }
+  .ingredients {
+    grid-area: ingredients;
+    display: grid;
+    border: 1px solid red;
+    grid-template-areas:
+      "ingredients-title"
+      "add-ingredient"
+      "ingredients-list";
+    .ingredients-title {
+      grid-area: ingredients-title;
+    }
+    .add-ingredient {
+      grid-area: add-ingredient;
+      background-color: lightgreen;
+      width: 100%;
+    }
+    .ingredients-list {
+      // grid-area: ingredients-list;
+      margin-left: 1.5vw;
+      li {
+        display: flex;
+        align-items: center;
+        .bullet {
+          margin-right: 1vw;
+          height: 1.5vh;
+        }
+      }
+    }
+  }
+  .steps {
+    grid-area: steps;
+    .steps-list {
+      margin-left: 1.5vw;
+      li {
+        margin-bottom: 1.5vh;
+        display: flex;
+        align-items: flex-start;
+        .bullet {
+          margin-right: 1vw;
+          margin-top: 1vh;
+        }
+      }
+    }
+    input {
+       margin-left: 1.5vw;
+    }
+  }
+  .notes {
+    grid-area: notes;
+    .notes-list {
+      margin-left: 1.5vw;
+    }
+    textarea {
+      margin-left: 1.5vw;
+    }
+  }
+  .section-title {
+    font-size: 3vh;
+    font-weight: 900;
+  }
+  input, textarea {
+    font-size: 2vh;
+  }
+
 }
 .add-ingredient {
   border: 1px solid lightgray;
@@ -360,6 +466,17 @@ export default {
 // =================== Mobile ==================
 /* phones */
 @media only screen and (max-width: 767px) {
+.recipe-page {
+  display: grid;
+  width: 94vw;
+  grid-template-areas:
+    "page-header page-header"
+    "rating      rating"
+    "recipe-photo recipe-photo"
+    "ingredients ingredients"
+    "steps steps"
+    "notes notes";
+}
 .add-ingredient {
   border: 1px solid red;
   // border: 1px solid lightgray;

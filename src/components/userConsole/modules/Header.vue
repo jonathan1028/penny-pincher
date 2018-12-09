@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="header _card">
     <!-- Logo -->
     <div class="logo">Penny Pincher</div>
     <div class="links">
