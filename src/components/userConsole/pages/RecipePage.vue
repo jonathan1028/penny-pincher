@@ -362,12 +362,12 @@ export default {
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    border: 1px solid pink;
+    // border: 1px solid pink;
   }
   .ingredients {
     grid-area: ingredients;
     display: grid;
-    border: 1px solid red;
+    // border: 1px solid red;
     grid-template-areas:
       "ingredients-title"
       "add-ingredient"

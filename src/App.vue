@@ -64,7 +64,7 @@ html {
 }
 
 ._page {
-  padding: 3vh;
+  padding: 3vh 3vw;
   background-color: white;
   width: 70vw;
   margin: 1vh auto;
@@ -145,8 +145,6 @@ button:hover{
 // ================================================ Mobile Styles ========================================
 @media only screen and (max-width: 767px) {
 ._page {
-  padding: 3vh;
-  background-color: white;
   // width: 80vw;
   margin: none;
 }

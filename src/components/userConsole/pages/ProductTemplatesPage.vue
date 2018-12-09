@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="_page">
     <h1>Products</h1>
     <div>
       <create-product></create-product>
@@ -58,10 +58,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.page {
-  padding: 3vh;
-  background-color: white;
-}
 .search{
   width: 38%;
 }

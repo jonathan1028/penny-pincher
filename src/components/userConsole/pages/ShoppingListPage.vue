@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="_page">
     <div class="field">
       <h1>{{shoppingList.name}}</h1>
     </div>
@@ -31,10 +31,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.page {
-  padding: 3vh;
-  background-color: white;
-}
 .field {
   display: flex;
   align-items: flex-end

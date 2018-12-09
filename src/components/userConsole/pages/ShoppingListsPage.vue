@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="_page shopping-lists-page">
     <h1 class="title">Shopping Lists</h1>
       <button
         class="create-button"
@@ -75,8 +75,6 @@ export default {
     "search search"
     "select-shopping-list select-shopping-list"
     "table table";
-  padding: 3vh;
-  background-color: white;
 }
 .title {
   grid-area: title;

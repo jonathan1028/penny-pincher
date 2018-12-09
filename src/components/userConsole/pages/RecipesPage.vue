@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="_page recipes-page">
       <h1 class="title">Recipes</h1>
       <button
         class="create-button"
@@ -107,7 +107,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.page {
+.recipes-page {
   display: grid;
   grid-template-areas:
     "title create-button"

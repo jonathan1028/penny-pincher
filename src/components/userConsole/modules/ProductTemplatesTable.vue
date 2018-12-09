@@ -1,9 +1,9 @@
 <template>
-  <div class="component">
-    <table>
-      <thead>
-        <tr>
-          <th
+  <!-- <div class="component"> -->
+    <div class="table">
+      <div class="table-head">
+        <div class="table-row">
+          <div class="table-head-column"
             v-for='(item, index) in columns'
             :key='index'
             :index="index"
@@ -12,50 +12,51 @@
             {{ item.title | capitalize }}
             <span class="arrow" :class="sortOrders[item.dbField] > 0 ? 'asc' : 'dsc'">
             </span>
-          </th>
-          <th>
+          </div>
+          <div class="table-head-column">
             Links
-          </th>
-        </tr>
-
-      </thead>
-      <tbody>
-        <tr
-          v-for='(row, index) in filteredData'
-          :key='index'
-          :index="index"
-        >
-          <td v-for='(col, index) in columns'
+          </div>
+        </div>
+      </div>
+      <!-- <div class="table-body"> -->
+        <div class="table-body">
+          <div class="table-row"
+            v-for='(row, index) in filteredData'
             :key='index'
             :index="index"
-            @click="view(row)"
           >
-          <div v-if="col.dbField === 'createdAt'">
-            <span>{{row[col.dbField] | formatDate}}</span>
+            <td v-for='(col, index) in columns'
+              :key='index'
+              :index="index"
+              @click="view(row)"
+            >
+            <div v-if="col.dbField === 'createdAt'">
+              <span>{{row[col.dbField] | formatDate}}</span>
+            </div>
+            <div v-else-if="col.dbField === 'updatedAt'">
+              <span>{{row[col.dbField] | relativeTime}}</span>
+            </div>
+            <div v-else-if="col.dbField === 'ownedBy'">
+              <span>{{ getName(row[col.dbField]) }}</span>
+            </div>
+            <div v-else>
+              {{row[col.dbField]}}
+            </div>
+            </td>
+            <td>
+              <button
+                @click="update(row)"
+              >Edit</button>
+              <button
+                @click="deleteObject(row)"
+              >Delete</button>
+            </td>
           </div>
-          <div v-else-if="col.dbField === 'updatedAt'">
-            <span>{{row[col.dbField] | relativeTime}}</span>
-          </div>
-          <div v-else-if="col.dbField === 'ownedBy'">
-            <span>{{ getName(row[col.dbField]) }}</span>
-          </div>
-          <div v-else>
-            {{row[col.dbField]}}
-          </div>
-          </td>
-          <td>
-            <button
-              @click="update(row)"
-            >Edit</button>
-            <button
-              @click="deleteObject(row)"
-            >Delete</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+        </div>
+      <!-- </div> -->
+    </div>
 
-  </div>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -172,10 +173,11 @@ export default {
 <style lang="scss" scoped>
 /* tr:nth-child(3) { border: solid thin; } */
 .component {
-  height: 50vh;
-  overflow-y: auto;
+  .table-body {
+    // height: 500px;
+  }
 }
-table {
+.table {
   /* border-collapse is needed to make the borders work properly on rows */
   margin-top: 1%;
   border-collapse: collapse;
@@ -183,6 +185,48 @@ table {
   border-radius: 3px;
   background-color: white;
   width: 100%;
+  .table-head {
+    .table-row:first-child { 
+        background-color: darkgray;
+        color: white;
+    }
+    .arrow {
+      display: inline-block;
+      vertical-align: middle;
+      width: 0;
+      height: 0;
+      margin-left: 5px;
+      opacity: 0.66;
+      cursor: pointer;
+    }
+    .arrow.asc {
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-bottom: 4px solid #fff;
+    }
+    .arrow.dsc {
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
+      border-top: 4px solid #fff;
+    }
+  }
+  .table-body {
+    height: 60vh;
+    overflow: auto;
+  }
+  .table-row {
+    // background-color: lightgreen;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 5vh;
+    border-bottom: 0.05vh solid lightgray;
+    align-items: center;
+  }
+}
+tbody {
+  // max-height: 50vh;
+  // overflow: auto;
+  // background-color: lawngreen;
 }
 th {
   height: 40px;
@@ -215,24 +259,7 @@ th.active {
 th.active .arrow {
   opacity: 1;
 }
-.arrow {
-  display: inline-block;
-  vertical-align: middle;
-  width: 0;
-  height: 0;
-  margin-left: 5px;
-  opacity: 0.66;
-}
-.arrow.asc {
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-bottom: 4px solid #fff;
-}
-.arrow.dsc {
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: 4px solid #fff;
-}
+
 .effect7
 {
   position:relative;

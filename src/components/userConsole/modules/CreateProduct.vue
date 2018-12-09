@@ -1,5 +1,5 @@
 <template>
-  <div class="modal _box-shadow1">
+  <div class="modal">
     <h2>Add Product</h2>
     <div class="field">
       <label for="">Name:</label>
