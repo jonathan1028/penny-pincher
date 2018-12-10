@@ -1,22 +1,22 @@
 <template>
   <div class="_page shopping-lists-page">
     <h1 class="title">Shopping Lists</h1>
-      <button
-        class="create-button"
-        @click="create">
-        + New Shopping List
-      </button>
-      <input
-        class="_search"
-        name="query" v-model="searchQuery" placeholder="Search">
-      <base-table
-        class="table"
-        :data="query"
-        :columns="columns"
-        :filter-key="searchQuery"
-        :deleteMutation="deleteMutation"
-        :gqlQuery="gqlQuery">
-      </base-table>
+    <button
+      class="header-button"
+      @click="create">
+      + New List
+    </button>
+    <input
+      class="_search"
+      name="query" v-model="searchQuery" placeholder="Search">
+    <base-table
+      class="table"
+      :data="query"
+      :columns="columns"
+      :filter-key="searchQuery"
+      :deleteMutation="deleteMutation"
+      :gqlQuery="gqlQuery">
+    </base-table>
   </div>
 </template>
 
@@ -70,18 +70,19 @@ export default {
 <style lang="scss" scoped>
 .shopping-lists-page {
   display: grid;
+  grid-template-rows: 10vh 7vh 10vh auto;
   grid-template-areas:
-    "title create-button"
+    "title header-button"
     "search search"
-    "select-shopping-list select-shopping-list"
     "table table";
 }
 .title {
   grid-area: title;
 }
-.create-button {
-  grid-area: create-button;
+.header-button {
+  grid-area: header-button;
   width: 15vw;
+  height: 5vh;
   justify-self: end;
 }
 .search{

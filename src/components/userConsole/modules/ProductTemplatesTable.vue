@@ -186,7 +186,7 @@ export default {
   background-color: white;
   width: 100%;
   .table-head {
-    .table-row:first-child { 
+    .table-row:first-child {
         background-color: darkgray;
         color: white;
     }

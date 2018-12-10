@@ -185,13 +185,14 @@ export default {
     },
     view: function (obj) {
       // Creates a dynamic path and stores to localStorage regardless of what type of object is passed in
-      let path = obj.__typename.toLowerCase() + '/' + obj.id
+      apolloClient.writeData({ data: { isEditMode: false } })
+      let path = obj.__typename.toLowerCase() + 's' + '/' + obj.id
       localStorage.setItem(obj.__typename.toLowerCase(), JSON.stringify(obj))
       this.$router.push({path: path})
     },
     update (obj) {
       apolloClient.writeData({ data: { isEditMode: true } })
-      let path = obj.__typename.toLowerCase() + '/' + obj.id
+      let path = obj.__typename.toLowerCase() + 's' + '/' + obj.id
       localStorage.setItem(obj.__typename.toLowerCase(), JSON.stringify(obj))
       this.$router.push({path: path})
     },

@@ -23,6 +23,7 @@ import ProductTemplatesPage from '../components/userConsole/pages/ProductTemplat
 import ProductTemplateUpdatePage from '../components/userConsole/pages/ProductTemplateUpdatePage'
 
 import ShoppingListPage from '../components/userConsole/pages/ShoppingListPage'
+// Recipes
 import RecipesPage from '../components/userConsole/pages/RecipesPage'
 import RecipePage from '../components/userConsole/pages/RecipePage'
 
@@ -153,7 +154,7 @@ const router = new Router({
           }
         },
         {
-          path: '/recipe/:id',
+          path: '/recipes/:id',
           component: RecipePage,
           meta: {
             requiresAuth: true

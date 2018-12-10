@@ -1,16 +1,10 @@
 <template>
   <div class="page">
-    <h1>Products</h1>
-    <div>
-      <form class="search">
-        <input name="query" v-model="searchQuery" placeholder="Search">
-      </form>
-      <base-list
-        :data="query"
-        :filter-key="searchQuery"
-        >
-      </base-list>
-    </div>
+    <base-list
+      :data="query"
+      :filter-key="searchQuery"
+      >
+    </base-list>
   </div>
 </template>
 
@@ -22,10 +16,13 @@ export default {
   components: {
     BaseList
   },
+  props: {
+    searchQuery: String
+  },
   data () {
     return {
-      query: [],
-      searchQuery: ''
+      query: []
+      // searchQuery: 'eggs'
     }
   },
   apollo: {
@@ -50,13 +47,7 @@ export default {
 .page {
   height: 60vh;
   overflow-y: auto;
-  padding: 3vh;
+  padding: 0vh 2vw;
   background-color: white;
-}
-.search{
-  width: 38%;
-}
-.adminPage {
-  margin: 0vh 5vw;
 }
 </style>

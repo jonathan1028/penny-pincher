@@ -204,7 +204,7 @@ export default {
 /* tr:nth-child(3) { border: solid thin; } */
 table {
   /* border-collapse is needed to make the borders work properly on rows */
-  margin-top: 1%;
+  // margin-top: 1%;
   border-collapse: collapse;
   border-bottom: 2px solid lightgray;
   border-radius: 3px;

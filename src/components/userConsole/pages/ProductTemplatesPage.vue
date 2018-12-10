@@ -1,21 +1,20 @@
 <template>
-  <div class="_page">
-    <h1>Products</h1>
-    <div>
-      <input 
-        class="_search"
-        name="query" v-model="searchQuery" placeholder="Search">
-      <div class="row">
-        <div class="label">Add Product:</div>
-        <create-product></create-product>
-      </div>
-      <product-templates-table
-        :data="query"
-        :columns="columns"
-        :filter-key="searchQuery"
-        >
-      </product-templates-table>
+  <div class="_page product-templates-page">
+    <h1 class="title">Products</h1>
+    <input
+      class="_search"
+      name="query" v-model="searchQuery" placeholder="Search">
+    <div class="product-create">
+      <div class="label">Add Product:</div>
+      <create-product></create-product>
     </div>
+    <product-templates-table
+      class="product-templates-table"
+      :data="query"
+      :columns="columns"
+      :filter-key="searchQuery"
+      >
+    </product-templates-table>
   </div>
 </template>
 
@@ -61,15 +60,32 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.row {
-  font-size: 4vmin;
+.product-templates-page {
   display: grid;
-  grid-template-columns: max-content auto;
-  align-items: center;
-  margin-top: 2vh;
-  margin-bottom: 1vh;
-  .label {
-    margin-right: 1vw;
+  grid-template-rows: 10vh 7vh auto auto;
+  grid-template-areas:
+    "title title"
+    "search search"
+    "product-create product-create"
+    "product-templates-table product-templates-table";
+  background-color: white;
+  ._search {
+    grid-area: search;
+  }
+  .product-create {
+    grid-area: product-create;
+    font-size: 4vmin;
+    display: grid;
+    grid-template-columns: max-content auto;
+    align-items: center;
+    // margin-top: 2vh;
+    margin-bottom: 1vh;
+    .label {
+      margin-right: 1vw;
+    }
+  }
+  .product-templates-table {
+    grid-area: product-templates-table;
   }
 }
 // ================================================ Mobile Styles ========================================

@@ -65,7 +65,7 @@ export default {
       },
       unitOptions: ['pinch', 'tsp', 'tbsp', 'fl oz', 'cup', 'pt', 'qt', 'gal', 'oz', 'lb'],
       categoryOptions: ['Produce', 'Meat', 'Seafood', 'Dairy', 'Bakery', 'Frozen Food', 'Beverages',
-      'Baking Goods', 'Packaged Goods', 'Condiments']
+        'Baking Goods', 'Packaged Goods', 'Condiments']
       // currentUserId: this.$store.state.auth.user.id
     }
   },
@@ -115,7 +115,7 @@ export default {
     "product-name category price pricing-unit";
   font-size: 2vmin;
   border: 1px solid lightgray;
-  input { 
+  input {
     font-size: inherit;
     padding: 0.8vh 0vw 0.8vh 0.5vw;
   }
@@ -139,7 +139,7 @@ export default {
 }
 // ================================================ Mobile Styles ========================================
 @media only screen and (max-width: 767px) {
-.add-product { 
+.add-product {
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-areas:
     "product-name  product-name category"

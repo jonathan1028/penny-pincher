@@ -7,7 +7,9 @@
           <input
             v-model="Recipe.name"
             type="text"
-            placeholder="Recipe Name">
+            placeholder="Recipe Name"
+            @change="update(Recipe)"
+            >
         </span>
       </div>
       <div class="toggle-button">
@@ -149,7 +151,7 @@
 </template>
 
 <script>
-import SelectProduct from '../modules/SelectProduct'
+import ProductAdd from '../modules/ProductAdd'
 import ProductList from '../modules/ProductList'
 import { GET_RECIPE_QUERY, ALL_PRODUCTTEMPLATES_QUERY, CREATE_PRODUCT_MUTATION, MY_RECIPES_QUERY, UPDATE_RECIPE_MUTATION, DELETE_PRODUCT_MUTATION } from '../../../constants/graphql'
 import gql from 'graphql-tag'
@@ -159,7 +161,7 @@ import vSelect from 'vue-select'
 export default {
   name: 'RecipePage',
   components: {
-    vSelect, SelectProduct, ProductList
+    vSelect, ProductAdd, ProductList
   },
   // beforeCreate () {
   //   // this.recipe = JSON.parse(localStorage.getItem('recipe'))
@@ -209,7 +211,7 @@ export default {
       query: GET_RECIPE_QUERY,
       variables () {
         return {
-          id: this.$route.params.id
+          id: this.$route.params.id || ''
         }
       },
       result ({ data }) {
@@ -299,6 +301,7 @@ export default {
     },
     save () {
       apolloClient.writeData({ data: { isEditMode: false } })
+      this.$router.push({path: '/recipes'})
     },
     deleteIngredient (row) {
       let index = this.Recipe.ingredients.indexOf(row)

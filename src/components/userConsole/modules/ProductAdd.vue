@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="product-add">
     <!-- <div class="product"> -->
       <v-select
         class="product"
@@ -9,26 +9,29 @@
         :options="query">
       </v-select>
     <!-- </div> -->
-    <div class="qty">
+    <!-- <div class="qty"> -->
       <input
+        class="qty"
         v-model="quantity"
         type="text"
         placeholder="Qty">
-    </div>
-    <div class="unit">
+    <!-- </div> -->
+    <!-- <div class="unit"> -->
       <v-select
+        class="unit"
         placeholder="Unit"
         v-model="selectedUnit"
         label="name"
         :options="units">
       </v-select>
-    </div>
-    <div class="format">
+    <!-- </div> -->
+    <!-- <div class="format"> -->
       <input
+        class="format"
         v-model="format"
         type="text"
         placeholder="Chopped, sliced, minced, etc.">
-    </div>
+    <!-- </div> -->
     <!-- <label for="">Quantity:</label> -->
     <button class="add-button _button1"
       @click="submit()"
@@ -141,11 +144,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@media only screen and (min-width: 768px) {
-    /* tablets and desktop */
+.product-add {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 30% 20% 10% 30% 10%;
+  grid-template-areas:
+    "product-name category price pricing-unit";
+  font-size: 2vmin;
+  border: 1px solid lightgray;
+  input {
+    font-size: inherit;
+    padding: 0.8vh 0vw 0.8vh 0.5vw;
+  }
+  .product-name {
+    grid-area: product-name;
+    // background-color: pink;
+  }
 }
 
-/* phones */
+// ================================================ Mobile Styles ========================================
 @media only screen and (max-width: 767px) {
   .container {
     width: auto;
@@ -187,43 +204,4 @@ export default {
     }
   }
 }
-
-@media only screen and (max-width: 767px) and (orientation: portrait) {
-    /* portrait phones */
-}
-.container {
-  border: 1px solid lightgray;
-  display: grid;
-  // width: 100%;
-  margin: 0px;
-  padding: 0px;
-  grid-template-columns: 30% 10% 10% 35% 15%;
-  font-size: 3vh;
-  .product {
-    font-size: inherit;
-    // width: 20vw;
-    // font-size: 3vh;
-  }
-  .qty {
-    input {
-      font-size: inherit;
-      padding: 0.9vh 0vw 0.9vh 0vw;
-      width: 100%;
-    }
-  }
-  .unit {
-    font-size: inherit;
-  }
-  .format {
-    input {
-      font-size: inherit;
-      padding: 0.9vh 0vw 0.9vh 0vw;
-      width: 100%;
-    }
-  }
-  button {
-    font-size: 3vh;
-  }
-}
-
 </style>
