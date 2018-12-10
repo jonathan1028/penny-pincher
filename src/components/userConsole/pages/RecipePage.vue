@@ -467,7 +467,6 @@ export default {
   }
 }
 // =================== Mobile ==================
-/* phones */
 @media only screen and (max-width: 767px) {
 .recipe-page {
   display: grid;

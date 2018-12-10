@@ -1,22 +1,17 @@
 <template>
   <div class="product-add">
-    <!-- <div class="product"> -->
       <v-select
-        class="product"
+        class="product-name"
         placeholder="Add Product"
         v-model="selected"
         label="name"
         :options="query">
       </v-select>
-    <!-- </div> -->
-    <!-- <div class="qty"> -->
       <input
         class="qty"
         v-model="quantity"
         type="text"
         placeholder="Qty">
-    <!-- </div> -->
-    <!-- <div class="unit"> -->
       <v-select
         class="unit"
         placeholder="Unit"
@@ -24,15 +19,11 @@
         label="name"
         :options="units">
       </v-select>
-    <!-- </div> -->
-    <!-- <div class="format"> -->
       <input
         class="format"
         v-model="format"
         type="text"
         placeholder="Chopped, sliced, minced, etc.">
-    <!-- </div> -->
-    <!-- <label for="">Quantity:</label> -->
     <button class="add-button _button1"
       @click="submit()"
     >
@@ -147,61 +138,48 @@ export default {
 .product-add {
   width: 100%;
   display: grid;
-  grid-template-columns: 30% 20% 10% 30% 10%;
+  grid-template-columns: 30% 10% 20% 30% 10%;
   grid-template-areas:
-    "product-name category price pricing-unit";
+    "product-name qty unit format";
   font-size: 2vmin;
   border: 1px solid lightgray;
   input {
     font-size: inherit;
-    padding: 0.8vh 0vw 0.8vh 0.5vw;
+    padding: 1vh 0vw 1vh 0.5vw;
   }
   .product-name {
     grid-area: product-name;
+    font-size: 2vmin;
     // background-color: pink;
+  }
+  .qty {
+    grid-area: qty;
+  }
+  .unit {
+    grid-area: unit;
+  }
+  .format {
+    grid-area: format;
   }
 }
 
 // ================================================ Mobile Styles ========================================
 @media only screen and (max-width: 767px) {
-  .container {
-    width: auto;
-    margin: 0vh 5vw;
-    display: grid;
-    grid-template-rows: auto auto auto;
-    grid-template-columns: auto auto;
+  .product-add {
+    grid-template-columns: 30% 50% 20%;
     grid-template-areas:
-      "product product"
-      "qty unit"
-      "format add-button";
-    .product {
-      width: 89vw;
-      grid-area: product;
-      // border: 1px solid red;
-    }
+      "product-name product-name qty"
+      "unit format .";
     .qty {
-      grid-area: qty;
-      width: 30vw;
-      margin-right: 5vw;
       border-bottom: 0.15vh solid lightgray;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      height: 2vh;
     }
-    .unit {
-      grid-area: unit;
-      width: 58vw;
-      margin-left: 4.5vw;
-      // border: 1px solid blue;
-    }
-    .format {
-      grid-area: format;
-      width: 78vw;
-      // margin-right: 10vw;
-      // border: 1px solid red;
-    }
-    .add-button {
-      grid-area: add-button;
-      width: 10vw;
-      margin-left: 52.5vw;
-    }
+    // .product-name {
+    //   height: 3.5vh;
+    // }
   }
 }
 </style>

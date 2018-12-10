@@ -43,34 +43,11 @@ html {
   padding: 3vh var(--page-padding-width);
   background-color: white;
   width: 70vw;
+  min-height: 86vh;
   margin: 1vh auto;
   h1 {
     font-size: 6vmin;
     margin-bottom: 1vh;
-  }
-  ._page-header1 {
-    width: 100%;
-    border: 1px solid red;
-    display: grid;
-    grid-template-rows: 10vh 7vh;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas:
-      "title header-button"
-      "_search _search";
-    .title {
-      grid-area: title;
-      background-color: pink;
-    }
-    .header-button {
-      grid-area: header-button;
-      width: 15vw;
-      height: 10vh;
-      justify-self: end;
-      background-color: green;
-    }
-    ._search{
-      grid-area: search;
-    }
   }
 }
 
@@ -89,7 +66,7 @@ html {
   font-size: 2.5vmin;
   border-bottom: 0.15vh solid lightgray;
   width: 20vw;
-  margin-bottom: 2vh;
+  margin-bottom: 2vmin;
 }
 form{
   padding: 0px;

@@ -10,14 +10,13 @@
     <input
       class="_search"
       name="query" v-model="searchQuery" placeholder="Search">
-    <div class="select-shopping-list">
-      <v-select
-        placeholder="Add to Shopping List"
-        v-model="selected"
-        label="name"
-        :options="allShoppingLists">
-      </v-select>
-    </div>
+    <v-select
+      class="select-shopping-list"
+      placeholder="Select Shopping List"
+      v-model="selected"
+      label="name"
+      :options="allShoppingLists">
+    </v-select>
     <recipes-table
       class="table"
       :data="query"
@@ -142,7 +141,7 @@ export default {
 <style lang="scss" scoped>
 .recipes-page {
   display: grid;
-  grid-template-rows: 10vh 7vh auto auto;
+  grid-template-rows: 10vmin 7vmin auto auto;
   grid-template-areas:
     "title header-button"
     "search search"

@@ -70,7 +70,7 @@ export default {
 <style lang="scss" scoped>
 .shopping-lists-page {
   display: grid;
-  grid-template-rows: 10vh 7vh 10vh auto;
+  grid-template-rows: 10vmin 7vmin auto;
   grid-template-areas:
     "title header-button"
     "search search"

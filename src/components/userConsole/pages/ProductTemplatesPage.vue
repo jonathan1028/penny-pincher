@@ -6,7 +6,9 @@
       name="query" v-model="searchQuery" placeholder="Search">
     <div class="product-create">
       <div class="label">Add Product:</div>
-      <create-product></create-product>
+      <create-product
+        class="create-product"
+      />
     </div>
     <product-templates-table
       class="product-templates-table"
@@ -62,7 +64,7 @@ export default {
 <style lang="scss" scoped>
 .product-templates-page {
   display: grid;
-  grid-template-rows: 10vh 7vh auto auto;
+  grid-template-rows: 10vmin 7vmin auto auto;
   grid-template-areas:
     "title title"
     "search search"
@@ -76,12 +78,18 @@ export default {
     grid-area: product-create;
     font-size: 4vmin;
     display: grid;
+    grid-template-areas:
+      "label create-product";
     grid-template-columns: max-content auto;
     align-items: center;
     // margin-top: 2vh;
     margin-bottom: 1vh;
     .label {
+      grid-area: label;
       margin-right: 1vw;
+    }
+    .create-product {
+      grid-area: create-product;
     }
   }
   .product-templates-table {
@@ -89,9 +97,19 @@ export default {
   }
 }
 // ================================================ Mobile Styles ========================================
-@media only screen and (max-width: 767px) {
-.row {
-  grid-template-columns: 1fr;
+@media only screen and (max-width: 875px) {
+.product-templates-page {
+  .product-create {
+    grid-template-areas:
+        "label"
+        "create-product";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    // background-color: lightblue;
+    // .label {
+    //   margin-right: 5vw;
+    // }
+  }
 }
 }
 </style>

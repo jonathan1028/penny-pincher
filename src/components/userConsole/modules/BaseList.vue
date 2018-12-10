@@ -6,7 +6,7 @@
         :key='index'
       >
         {{category}}
-        <ul>
+        <ul class="items-lists">
           <div
             v-for='(row, index) in filteredData'
             :key='index'
@@ -183,6 +183,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.items-lists {
+  margin-left: 5vw;
+}
 input {
   width: auto;
 }

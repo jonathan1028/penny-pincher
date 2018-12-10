@@ -1,47 +1,34 @@
 <template>
   <div class="add-product">
-    <!-- <h2>Add Product</h2> -->
-    <!-- <div class="container"> -->
-      <!-- <label for="">Name:</label> -->
-      <input
-        class="product-name"
-        v-model="Product.name"
-        type="text"
-        placeholder="Name">
-      <!-- <label for="">Category:</label> -->
-      <v-select
-        class="category"
-        placeholder="Category"
-        v-model="Product.category"
-        label="name"
-        :options="categoryOptions">
-      </v-select>
-      <!-- <label for="">Price:</label> -->
-      <input
-        class="price"
-        v-model="Product.price"
-        type="text"
-        placeholder="Price">
-      <!-- <label for="">Pricing Unit:</label> -->
-      <!-- <div class="unit"> -->
-        <v-select
-          class="pricing-unit"
-          placeholder="Pricing Unit"
-          v-model="Product.pricingUnit"
-          label="name"
-          :options="unitOptions">
-        </v-select>
-      <!-- </div> -->
-      <!-- <input
-        v-model="Product.pricingUnit"
-        type="text"
-        placeholder=""> -->
-      <button class="_button1"
-        @click="submit()"
-      >
-        +
-      </button>
-    <!-- </div> -->
+  <input
+    class="product-name"
+    v-model="Product.name"
+    type="text"
+    placeholder="Name">
+  <v-select
+    class="category"
+    placeholder="Category"
+    v-model="Product.category"
+    label="name"
+    :options="categoryOptions">
+  </v-select>
+  <input
+    class="price"
+    v-model="Product.price"
+    type="text"
+    placeholder="Price">
+  <v-select
+    class="pricing-unit"
+    placeholder="Pricing Unit"
+    v-model="Product.pricingUnit"
+    label="name"
+    :options="unitOptions">
+  </v-select>
+  <button class="_button1"
+    @click="submit()"
+  >
+    +
+  </button>
   </div>
 </template>
 
