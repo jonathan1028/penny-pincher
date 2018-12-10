@@ -177,9 +177,10 @@ export default {
     "product-name qty unit format";
   font-size: 2vmin;
   border: 1px solid lightgray;
+  align-items: center;
   input {
     font-size: inherit;
-    padding: 1vh 0vw 1vh 0.5vw;
+    padding: 0.8vh 0vw 0.8vh 0.5vw;
   }
   .product-name {
     grid-area: product-name;
@@ -194,6 +195,9 @@ export default {
   }
   .format {
     grid-area: format;
+  }
+  button {
+    height: 100%;
   }
 }
 

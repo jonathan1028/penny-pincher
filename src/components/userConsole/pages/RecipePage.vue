@@ -80,7 +80,8 @@
         :key='index'
       >
         <li>
-          <icon class="bullet" icon="utensils"/>
+          <!-- <icon class="bullet" icon="utensils"/> -->
+          <div class="bullet">{{index + 1}}.</div>
           <div>
             {{row}}
             <button
@@ -361,7 +362,7 @@ export default {
         align-items: center;
         .bullet {
           margin-right: 1vw;
-          height: 1.5vh;
+          height: 3vmin;
         }
       }
     }
@@ -376,7 +377,8 @@ export default {
         align-items: flex-start;
         .bullet {
           margin-right: 1vw;
-          margin-top: 1vh;
+          // margin-top: 1vh;
+          font-size: 3vmin;
         }
       }
     }
