@@ -33,13 +33,16 @@
 </template>
 
 <script>
-import { CREATE_PRODUCT_MUTATION, ALL_PRODUCTTEMPLATES_QUERY, MY_PRODUCTS_QUERY } from '../../../constants/graphql'
+import { CREATE_PRODUCT_MUTATION, ALL_PRODUCTTEMPLATES_QUERY, MY_PRODUCTS_QUERY, MY_RECIPES_QUERY } from '../../../constants/graphql'
 import vSelect from 'vue-select'
 
 export default {
   name: 'SelectProduct',
   components: {
     vSelect
+  },
+  props: {
+    listType: String
   },
   data () {
     return {
@@ -63,9 +66,8 @@ export default {
       format: '',
       price: null,
       selected: '',
-      quantity: ''
-
-      // currentUserId: this.$store.state.auth.user.id
+      quantity: '',
+      userId: this.$store.state.auth.userId
     }
   },
   apollo: {
@@ -96,35 +98,67 @@ export default {
       console.log('Selected', this.selected)
       console.log('Shopping List Id', this.$route.params.id)
       let quantity = parseFloat(this.quantity)
+      let shoppingListId = null
+      let recipeId = null
       // let price = parseFloat(this.price)
+      if (this.listType === 'shoppingList') {
+        shoppingListId = this.$route.params.id
+      }
+      if (this.listType === 'recipe') {
+        recipeId = this.$route.params.id
+      }
+
       this.$apollo.mutate({
         mutation: CREATE_PRODUCT_MUTATION,
         variables: {
           templateId: this.selected.id,
-          shoppingListId: this.$route.params.id,
+          shoppingListId: shoppingListId,
+          recipeId: recipeId,
           quantity: quantity,
           format: this.format,
           unit: this.selectedUnit.value
         },
         update: (store, { data: { createProduct } }) => {
-          // Pull data from the stored query
-          const data = store.readQuery({
-            query: MY_PRODUCTS_QUERY,
-            variables: {
-              listId: this.$route.params.id
+          if (this.listType === 'shoppingList') {
+            // Pull data from the stored query
+            const data = store.readQuery({
+              query: MY_PRODUCTS_QUERY,
+              variables: {
+                listId: this.$route.params.id
+              }
+            })
+            // We add the new data
+            data.allProducts.push(createProduct)
+            console.log('Test', data)
+            // We update the cache
+            store.writeQuery({
+              query: MY_PRODUCTS_QUERY,
+              variables: {
+                listId: this.$route.params.id
+              },
+              data: data
+            })
+          }
+          if (this.listType === 'recipe') {
+            const data = store.readQuery({
+              query: MY_RECIPES_QUERY,
+              variables: {
+                ownedById: this.userId
+              }
+            })
+            console.log('Recipes Query', data)
+            // We add the new data
+            const index = data.allRecipes.findIndex(x => x.id === this.$route.params.id)
+            if (index !== -1) {
+              data.allRecipes[index].ingredients.push(createProduct)
             }
-          })
-          // We add the new data
-          data.allProducts.push(createProduct)
-          console.log('Test', data)
-          // We update the cache
-          store.writeQuery({
-            query: MY_PRODUCTS_QUERY,
-            variables: {
-              listId: this.$route.params.id
-            },
-            data: data
-          })
+            console.log('Test', data)
+            // We update the cache
+            store.writeQuery({
+              query: MY_RECIPES_QUERY,
+              data: data
+            })
+          }
         }
       }).catch((error) => {
         console.error(error)

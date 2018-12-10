@@ -135,7 +135,7 @@ button:hover{
 // height: 100vh;
 ._page {
   width: calc(100vw - 2 * var(--page-padding-width));
-  height: 90vh;
+  // height: 90vh;
   margin-top: 0vh;
 }
 }

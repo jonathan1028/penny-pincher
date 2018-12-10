@@ -13,6 +13,7 @@
       <div class="label">Add Item:</div>
       <product-add
         class="product-add"
+        :listType="'shoppingList'"
       />
     </div>
     <div class="label">Items</div>

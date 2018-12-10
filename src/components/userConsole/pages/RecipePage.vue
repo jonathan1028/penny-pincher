@@ -39,43 +39,11 @@
       </div>
     <div class="ingredients section">
       <div class="ingredients-title section-title">Ingredients:</div>
-      <div
+      <product-add
         class="add-ingredient"
-        v-if="isEditMode">
-        <div class="product-name">
-          <v-select
-            placeholder="Add Ingredient"
-            v-model="selected"
-            label="name"
-            :options="query">
-          </v-select>
-        </div>
-        <div class="qty">
-          <input
-            v-model="ingredient.quantity"
-            type="text"
-            placeholder="Qty">
-        </div>
-        <div class="unit">
-          <v-select
-            placeholder="Unit"
-            v-model="ingredient.unit"
-            label="name"
-            :options="unitOptions">
-          </v-select>
-        </div>
-        <div class="details">
-          <input
-            v-model="ingredient.format"
-            type="text"
-            placeholder="Details">
-        </div>
-        <button class="_button1"
-          @click="addIngredient()"
-        >
-          +
-        </button>
-      </div>
+        v-if="isEditMode"
+        :listType="'recipe'"
+      />
       <div
         class="ingredients-list"
         v-for='(row, index) in Recipe.ingredients'
@@ -338,7 +306,8 @@ export default {
   grid-template-areas:
     "page-header page-header"
     "rating      rating"
-    "ingredients recipe-photo"
+    "recipe-photo recipe-photo"
+    "ingredients ingredients"
     "steps steps"
     "notes notes";
   .page-header {
@@ -371,17 +340,18 @@ export default {
     grid-area: ingredients;
     display: grid;
     // border: 1px solid red;
+    grid-template-columns: 1fr 1fr;
     grid-template-areas:
-      "ingredients-title"
-      "add-ingredient"
-      "ingredients-list";
+      "ingredients-title ingredients-title"
+      "add-ingredient add-ingredient"
+      "ingredients-list ingredients-list";
     .ingredients-title {
       grid-area: ingredients-title;
     }
     .add-ingredient {
       grid-area: add-ingredient;
-      background-color: lightgreen;
-      width: 100%;
+      // background-color: lightgreen;
+      // width: 100%;
     }
     .ingredients-list {
       // grid-area: ingredients-list;
@@ -432,40 +402,6 @@ export default {
   }
 
 }
-.add-ingredient {
-  border: 1px solid lightgray;
-  display: grid;
-  width: 90vw;
-  margin: 0px;
-  padding: 0px;
-  grid-template-columns: 60% 15% 15% 10%;
-  .unit {
-    // width: 10%
-    // border: 1px solid black;
-    display: flex;
-    align-items: center;
-    margin-left: 1vw;
-    font-size: 2vh;
-  }
-  .qty {
-    // border: 1px solid black;
-    input {
-      padding-left: 0.5vw;
-      height: 4vh;
-      font-size: 2vh;
-      width: 100%;
-    }
-  }
-  .product-name {
-    // border: 1px solid black;
-    // height: 2.5vh;
-    font-size: 2vh;
-    // margin-left: 1vw;
-  }
-  button {
-    font-size: 3vh;
-  }
-}
 // =================== Mobile ==================
 @media only screen and (max-width: 767px) {
 .recipe-page {
@@ -478,74 +414,13 @@ export default {
     "ingredients ingredients"
     "steps steps"
     "notes notes";
-}
-.add-ingredient {
-  border: 1px solid red;
-  // border: 1px solid lightgray;
-  display: grid;
-  grid-template-columns: 20vw 50vw 20vw;
-  grid-template-rows: 5vh 5vh 5vh 5vh;
-  grid-template-areas:
-   "product-name product-name product-name "
-   "qty unit unit"
-   "details details details";
-  // width: 100%;
-  // margin: 0px;
-  // padding: 0px;
-  // grid-template-columns: 60% 15% 15% 10%;
-  .product-name {
-    grid-area: product-name;
-    // width: 30vw;
+  .ingredients {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "ingredients-title"
+      "add-ingredient"
+      "ingredients-list";
   }
-  .qty {
-    grid-area: qty;
-  }
-  .unit {
-    grid-area: unit;
-    font-size: 2vh;
-    // width: 50vw;
-    // border: 1px solid black;
-    margin: 0px;
-    .v-select {
-      width: 100%;
-    }
-  }
-  .details {
-    grid-area: details;
-    width: 100%;
-    border: 1px solid lightgray;
-    // background-color: blue;
-    input {
-      height: 100%;
-      width: 100%;
-    }
-  }
-  // .unit {
-  //   // width: 10%
-  //   // border: 1px solid black;
-  //   display: flex;
-  //   align-items: center;
-  //   margin-left: 1vw;
-  //   font-size: 2vh;
-  // }
-  // .qty {
-  //   // border: 1px solid black;
-  //   input {
-  //     padding-left: 0.5vw;
-  //     height: 4vh;
-  //     font-size: 2vh;
-  //     width: 100%;
-  //   }
-  // }
-  // .v-select {
-  //   // border: 1px solid black;
-  //   // height: 2.5vh;
-  //   font-size: 2vh;
-  //   // margin-left: 1vw;
-  // }
-  // button {
-  //   font-size: 3vh;
-  // }
 }
 }
 </style>
