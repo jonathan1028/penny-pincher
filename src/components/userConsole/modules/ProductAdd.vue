@@ -110,7 +110,7 @@ export default {
             templateId: this.selected.id,
             shoppingListId: shoppingListId,
             recipeId: recipeId,
-            quantity: quantity || '',
+            quantity: quantity,
             format: this.format,
             unit: this.selectedUnit
           },
@@ -158,7 +158,7 @@ export default {
             this.errors = []
             this.selected = null
             this.quantity = null
-            this.unit = null
+            this.selectedUnit = null
             this.format = null
           }
         }).catch((error) => {

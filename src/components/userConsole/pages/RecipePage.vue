@@ -335,7 +335,7 @@ export default {
       margin-left: 1.5vw;
       li {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         .bullet {
           margin-right: 1vw;
           height: 3vmin;
