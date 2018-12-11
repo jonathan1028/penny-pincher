@@ -56,7 +56,7 @@
         <li>
           <icon class="bullet" :icon="['far', 'lemon']"/>
           <div>
-            {{`${row.quantity} ${row.unit}`}} {{row.template.name}} {{row.format}}
+            {{row.quantity}} <span v-if="row.unit !== 'each' && row.unit !== null">{{row.unit}}</span> {{row.template.name}} {{row.format}}
             <button
               v-if="isEditMode"
               @click="deleteIngredient(row)"
