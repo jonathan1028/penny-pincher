@@ -34,6 +34,10 @@
         </span>
       </div>
     </div>
+      <input v-on:change="file" type="file" id="file" name="file" >
+      <button
+        @click='upload()'
+      >Submit</button>
     <div class="recipe-photo section">
         <img class="recipe-photo" src="../../../assets/logo.png"/>
       </div>
@@ -122,7 +126,7 @@
 <script>
 import ProductAdd from '../modules/ProductAdd'
 import ProductList from '../modules/ProductList'
-import { GET_RECIPE_QUERY, ALL_PRODUCTTEMPLATES_QUERY, CREATE_PRODUCT_MUTATION, MY_RECIPES_QUERY, UPDATE_RECIPE_MUTATION, DELETE_PRODUCT_MUTATION } from '../../../constants/graphql'
+import { GET_RECIPE_QUERY, ALL_PRODUCTTEMPLATES_QUERY, MY_RECIPES_QUERY, UPDATE_RECIPE_MUTATION, DELETE_PRODUCT_MUTATION } from '../../../constants/graphql'
 import gql from 'graphql-tag'
 import { apolloClient } from '../../../apollo-client'
 import vSelect from 'vue-select'
@@ -155,7 +159,9 @@ export default {
       Recipe: {
       },
       userId: this.$store.state.auth.userId,
-      unitOptions: ['pinch', 'tsp', 'tbsp', 'fl oz', 'cup', 'pt', 'qt', 'gal', 'oz', 'lb']
+      unitOptions: ['pinch', 'tsp', 'tbsp', 'fl oz', 'cup', 'pt', 'qt', 'gal', 'oz', 'lb'],
+      file: {},
+      errors: []
     }
   },
   apollo: {
@@ -197,6 +203,12 @@ export default {
     `
   },
   methods: {
+    upload () {
+      console.log('Upload entered')
+      let data = new FormData()
+      data.append('data', this.file)
+      console.log('File', this.file)
+    },
     toggleEditMode () {
       apolloClient.writeData({ data: { isEditMode: !this.isEditMode } })
     },
@@ -204,44 +216,6 @@ export default {
       this.Recipe.steps.push(this.newStep)
       this.newStep = ''
       this.update()
-    },
-    addIngredient () {
-      this.$apollo.mutate({
-        mutation: CREATE_PRODUCT_MUTATION,
-        variables: {
-          templateId: this.selected.id,
-          recipeId: this.$route.params.id,
-          quantity: parseFloat(this.ingredient.quantity) || 0,
-          format: this.ingredient.format || '',
-          unit: this.ingredient.unit || ''
-        },
-        update: (store, { data: { createProduct } }) => {
-          // Pull data from the stored query
-          // console.log('Store from CreateREcipe', store)
-          const data = store.readQuery({
-            query: MY_RECIPES_QUERY,
-            variables: {
-              ownedById: this.userId
-            }
-          })
-          console.log('Recipes Query', data)
-          // We add the new data
-          const index = data.allRecipes.findIndex(x => x.id === this.$route.params.id)
-          if (index !== -1) {
-            data.allRecipes[index].ingredients.push(createProduct)
-          }
-          console.log('Test', data)
-          // We update the cache
-          store.writeQuery({
-            query: MY_RECIPES_QUERY,
-            data: data
-          })
-          this.ingredient = {}
-          this.selected = ''
-        }
-      }).catch((error) => {
-        console.error(error)
-      })
     },
     update () {
       let rating = parseFloat(this.Recipe.rating)
@@ -273,6 +247,7 @@ export default {
       this.$router.push({path: '/recipes'})
     },
     deleteIngredient (row) {
+      console.log('Ingredient to delete', row)
       let index = this.Recipe.ingredients.indexOf(row)
       this.Recipe.ingredients.splice(index, 1)
       this.$apollo.mutate({
@@ -283,12 +258,13 @@ export default {
       }).catch((error) => {
         console.error(error)
       })
-      console.log('Updated ingredients', index, this.ingredients)
+      console.log('Updated ingredients', index, this.Recipe.ingredients)
     },
     deleteStep (row) {
       let index = this.Recipe.steps.indexOf(row)
       this.Recipe.steps.splice(index, 1)
-      console.log('Updated steps', index, this.steps)
+      this.update()
+      console.log('Updated steps', index, this.Recipe.steps)
     }
   }
 }
