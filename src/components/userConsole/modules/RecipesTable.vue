@@ -136,7 +136,9 @@ export default {
           variables: {
             templateId: x.template.id,
             shoppingListId: this.shoppingList.id,
-            quantity: x.quantity
+            quantity: x.quantity,
+            format: x.format,
+            unit: x.unit
           },
           update: (store, { data: { createProduct } }) => {
             // Pull data from the stored query

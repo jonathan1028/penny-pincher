@@ -1,15 +1,14 @@
 <template>
-  <div>
-    <div>
+  <div class="product-add">
+    <div class="errors">
       <div
-        class="errors"
+        class="error-item"
         v-for="(error, index) in errors"
         :key="index">
         {{error}}
       </div>
-      <!-- {{errors}} -->
     </div>
-    <div class="product-add">
+    <div class="product-input">
         <input
           class="qty"
           v-model="quantity"
@@ -180,57 +179,61 @@ export default {
 
 <style lang="scss" scoped>
 .product-add {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 10% 20% 30% 30% 10%;
-  grid-template-areas:
-    "qty unit product-name format";
-  font-size: 2vmin;
-  border: 1px solid lightgray;
-  align-items: center;
-  input {
-    font-size: inherit;
-    padding: 0.8vh 0vw 0.8vh 0.5vw;
-  }
-  .product-name {
-    grid-area: product-name;
+  .product-input {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 10% 20% 30% 30% 10%;
+    grid-template-areas:
+      "qty unit product-name format";
     font-size: 2vmin;
-    // background-color: pink;
+    border: 1px solid lightgray;
+    align-items: center;
+    input {
+      font-size: inherit;
+      padding: 0.8vh 0vw 0.8vh 0.5vw;
+    }
+    .product-name {
+      grid-area: product-name;
+      font-size: 2vmin;
+      // background-color: pink;
+    }
+    .qty {
+      grid-area: qty;
+    }
+    .unit {
+      grid-area: unit;
+    }
+    .format {
+      grid-area: format;
+    }
+    button {
+      height: 100%;
+    }
   }
-  .qty {
-    grid-area: qty;
+  .errors {
+    .error-item {
+      color: red;
+      font-size: 2vmin;
+    }
   }
-  .unit {
-    grid-area: unit;
-  }
-  .format {
-    grid-area: format;
-  }
-  button {
-    height: 100%;
-  }
-}
-.errors {
-  color: red;
 }
 
 // ================================================ Mobile Styles ========================================
 @media only screen and (max-width: 767px) {
   .product-add {
-    grid-template-columns: 10% 30% 40% 20%;
-    grid-template-areas:
-      "qty unit product-name product-name"
-      "format format format .";
-    .qty {
-      border-bottom: 0.15vh solid lightgray;
-      border-top: none;
-      border-left: none;
-      border-right: none;
-      height: 2vh;
+    .product-input {
+      grid-template-columns: 10% 30% 40% 20%;
+      grid-template-areas:
+        "qty unit product-name product-name"
+        "format format format .";
+      .qty {
+        border-bottom: 0.15vh solid lightgray;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        height: 2vh;
+      }
     }
-    // .product-name {
-    //   height: 3.5vh;
-    // }
   }
 }
 </style>

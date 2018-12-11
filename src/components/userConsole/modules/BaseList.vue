@@ -1,11 +1,12 @@
 <template>
-  <div class="component">
+  <div class="base-list">
     <div>
       <div
+        class="category-section"
         v-for='(category, index) in getCategories'
         :key='index'
       >
-        {{category}}
+        <div class="category">{{category}}</div>
         <ul class="items-lists">
           <div
             v-for='(row, index) in filteredData'
@@ -13,11 +14,14 @@
           >
             <div v-if="row.template.category === category">
               <input
+                class="checkbox"
                 v-model="row.inCart"
                 @change="update(row)"
-                class="checkbox"
                 type="checkbox">
-              {{`${row.quantity} ${row.unit} of ${row.template.name} ${row.format}`}}
+              {{`${row.quantity}`}}
+              <span v-if="row.unit !== 'each' && row.unit !== null">{{row.unit}}</span>
+              {{row.template.name}}
+              <span v-if="row.format !== null">{{row.format}}</span>
               <button
                 @click="deleteObject(row)"
               >X</button>
@@ -87,6 +91,7 @@ export default {
           return String(row.template['name']).toLowerCase().indexOf(filterKey) > -1 || String(row.template['category']).toLowerCase().indexOf(filterKey) > -1
         })
       }
+      console.log('Filtered Data', data)
       return data
     }
   },
@@ -183,14 +188,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.items-lists {
-  margin-left: 5vw;
-}
-input {
-  width: auto;
-}
-li {
-  text-decoration-style: none;
+.base-list {
+  .category-section {
+    margin-bottom: 1vmin;
+  }
+  .category {
+    font-weight: 900;
+    margin-bottom: 0.5vmin;
+  }
+  .items-lists {
+    margin-left: 4vmin;
+  }
+  input {
+    width: auto;
+  }
+  li {
+    text-decoration-style: none;
+  }
 }
 
 </style>

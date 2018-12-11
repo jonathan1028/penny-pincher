@@ -72,11 +72,6 @@ export default {
   grid-area: search;
 }
 .product-add-row {
-  grid-area: product-add-row;
-  margin-bottom: 2vh;
-  display: grid;
-}
-.product-add-row {
     grid-area: product-add-row;
     font-size: 4vmin;
     display: grid;
