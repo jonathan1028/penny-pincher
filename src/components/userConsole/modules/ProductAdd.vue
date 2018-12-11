@@ -10,13 +10,6 @@
       <!-- {{errors}} -->
     </div>
     <div class="product-add">
-        <v-select
-          class="product-name"
-          placeholder="Add Product"
-          v-model="selected"
-          label="name"
-          :options="query">
-        </v-select>
         <input
           class="qty"
           v-model="quantity"
@@ -28,6 +21,13 @@
           v-model="selectedUnit"
           label="name"
           :options="units">
+        </v-select>
+        <v-select
+          class="product-name"
+          placeholder="Add Product"
+          v-model="selected"
+          label="name"
+          :options="query">
         </v-select>
         <input
           class="format"
@@ -58,19 +58,8 @@ export default {
   },
   data () {
     return {
-      units: [
-        {name: 'each', value: 'each'},
-        {name: 'pinch', value: 'pinch'},
-        {name: 'tsp', value: 'tsp'},
-        {name: 'tbsp', value: 'tbsp'},
-        {name: 'fl oz', value: 'fl oz'},
-        {name: 'cup', value: 'cup'},
-        {name: 'pt', value: 'pt'},
-        {name: 'qt', value: 'qt'},
-        {name: 'gal', value: 'gal'},
-        {name: 'oz', value: 'oz'},
-        {name: 'lb', value: 'lb'}
-      ],
+      query: [],
+      units: ['each', 'pinch', 'tsp', 'tbsp', 'fl oz', 'cup', 'pt', 'qt', 'gal', 'oz', 'lb'],
       selectedUnit: null,
       format: null,
       price: null,
@@ -105,13 +94,9 @@ export default {
   },
   methods: {
     submit () {
-      console.log('Selected', this.selected)
-      console.log('Shopping List Id', this.$route.params.id)
       let quantity = parseFloat(this.quantity)
-      console.log('Quantity', quantity)
       let shoppingListId = null
       let recipeId = null
-      // let price = parseFloat(this.price)
       if (this.listType === 'shoppingList') {
         shoppingListId = this.$route.params.id
       }
@@ -125,9 +110,9 @@ export default {
             templateId: this.selected.id,
             shoppingListId: shoppingListId,
             recipeId: recipeId,
-            quantity: quantity,
+            quantity: quantity || '',
             format: this.format,
-            unit: this.selectedUnit.value
+            unit: this.selectedUnit
           },
           update: (store, { data: { createProduct } }) => {
             if (this.listType === 'shoppingList') {
