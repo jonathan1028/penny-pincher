@@ -48,6 +48,7 @@ export default {
     return {
       query: [{label: 'Cookies', value: 'Cookies'}, {label: 'Broccoli', value: 'Broccoli'}],
       units: [
+        {name: 'each', value: 'each'},
         {name: 'pinch', value: 'pinch'},
         {name: 'tsp', value: 'tsp'},
         {name: 'tbsp', value: 'tbsp'},
