@@ -130,7 +130,12 @@ export default {
   methods: {
     addRecipe (recipe) {
       // Add recipe to local shoppingList
-      this.shoppingList.recipes.push(recipe)
+      if (!this.shoppingList.recipes) {
+        console.log('Recipes did not exist')
+        this.shoppingList['recipes'] = []
+      }
+      this.shoppingList['recipes'].push(recipe)
+      localStorage.setItem('shoppingList', JSON.stringify(this.shoppingList))
 
       // Add recipe to shoppingList in DB
       this.$apollo.mutate({
