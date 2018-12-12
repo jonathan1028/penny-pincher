@@ -174,6 +174,10 @@ export const MY_SHOPPINGLISTS_QUERY = gql`
       products {
         id
       }
+      recipes {
+        id
+        name
+      }
     }
   }
 `
@@ -206,6 +210,48 @@ export const CREATE_SHOPPINGLIST_MUTATION = gql`
       }
       products {
         id
+      }
+    }
+  }
+`
+
+// export const UPDATE_SHOPPINGLIST_MUTATION = gql`
+//   mutation UpdateShoppingListMutation($id: ID!, $name: String, $recipesIds: [ID!]) {
+//     updateShoppingList(
+//       id: $id
+//       name: $name
+//       recipesIds: $recipesIds
+//     ) {
+//       id
+//       name
+//       ownedBy {
+//         id
+//       }
+//       products {
+//         id
+//       }
+//       recipes {
+//         id
+//         name
+//       }
+//       recipesIds
+//     }
+//   }
+// `
+
+export const ADD_TO_RECIPESONSHOPPINGLIST_MUTATION = gql`
+  mutation addToRecipesOnShoppingList($recipeId: ID!, $shoppingListId: ID!) {
+    addToRecipesOnShoppingList(
+      recipesRecipeId: $recipeId
+      shoppingListsShoppingListId: $shoppingListId
+    ) {
+      recipesRecipe {
+        id
+        name
+      }
+      shoppingListsShoppingList {
+        id
+        name
       }
     }
   }

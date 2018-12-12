@@ -1,5 +1,5 @@
 # project: cjmjw62xi3gjh0100nabw430x
-# version: 9
+# version: 10
 
 type User @model {
   id: ID! @isUnique
@@ -127,6 +127,7 @@ type Recipe @model {
   rating: Float
   steps: [String!]
   updatedAt: DateTime!
+  shoppingLists: [ShoppingList!]! @relation(name: "RecipesOnShoppingList")
 }
 
 type ShoppingList @model {
@@ -136,6 +137,7 @@ type ShoppingList @model {
   ownedBy: User @relation(name: "UsersShoppingLists")
   products: [Product!]! @relation(name: "ProductsOnList")
   updatedAt: DateTime!
+  recipes: [Recipe!]! @relation(name: "RecipesOnShoppingList")
 }
 
 type Vendor @model {

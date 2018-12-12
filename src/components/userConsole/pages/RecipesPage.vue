@@ -10,13 +10,13 @@
     <input
       class="_search"
       name="query" v-model="searchQuery" placeholder="Search">
-    <v-select
+    <!-- <v-select
       class="select-shopping-list"
       placeholder="Select Shopping List"
       v-model="selected"
       label="name"
       :options="allShoppingLists">
-    </v-select>
+    </v-select> -->
     <recipes-table
       class="table"
       :data="query"

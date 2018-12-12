@@ -3,8 +3,8 @@
     <table>
       <thead>
         <tr>
-          <th>
-          </th>
+          <!-- <th>
+          </th> -->
           <th
             v-for='(item, index) in columns'
             :key='index'
@@ -27,11 +27,11 @@
           :key='index'
           :index="index"
         >
-          <td>
+          <!-- <td>
             <button
               @click="add(row)"
             >+ Add</button>
-          </td>
+          </td> -->
           <td v-for='(col, index) in columns'
             :key='index'
             :index="index"

@@ -75,12 +75,10 @@ export default {
     getCategories: function () {
       let categories = []
       this.data.forEach(x => {
-        console.log('Category', x, x.template)
         if (!categories.includes(x.template.category)) {
           categories.push(x.template.category)
         }
       })
-      console.log('Categories', categories)
       return categories
     },
     filteredData: function () {

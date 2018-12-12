@@ -9,30 +9,30 @@
       </div>
     </div>
     <div class="product-input">
-        <input
-          class="qty"
-          v-model="quantity"
-          type="text"
-          placeholder="Qty">
-        <v-select
-          class="unit"
-          placeholder="Unit (Optional)"
-          v-model="selectedUnit"
-          label="name"
-          :options="units">
-        </v-select>
-        <v-select
-          class="product-name"
-          placeholder="Add Product"
-          v-model="selected"
-          label="name"
-          :options="query">
-        </v-select>
-        <input
-          class="format"
-          v-model="format"
-          type="text"
-          placeholder="Chopped, sliced, minced, etc.">
+      <input
+        class="qty"
+        v-model="quantity"
+        type="text"
+        placeholder="Qty">
+      <v-select
+        class="unit"
+        placeholder="Unit (Optional)"
+        v-model="selectedUnit"
+        label="name"
+        :options="units">
+      </v-select>
+      <v-select
+        class="product-name"
+        placeholder="Add Product"
+        v-model="selected"
+        label="name"
+        :options="query">
+      </v-select>
+      <input
+        class="format"
+        v-model="format"
+        type="text"
+        placeholder="Chopped, sliced, minced, etc.">
       <button class="add-button _button1"
         @click="submit()"
       >
