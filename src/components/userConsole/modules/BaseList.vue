@@ -188,7 +188,7 @@ export default {
 <style lang="scss" scoped>
 .base-list {
   .category-section {
-    margin-bottom: 1vmin;
+    margin-bottom: 2.5vmin;
   }
   .category {
     font-weight: 900;

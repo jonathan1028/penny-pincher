@@ -71,7 +71,7 @@ export default {
       searchQueryIn: '',
       allRecipes: [],
       allProducts: [],
-      recipe: {},
+      recipe: null,
       recipes: [
         {
           name: 'test1'
@@ -232,6 +232,7 @@ export default {
       "recipes-label recipes-label"
       "recipes-add-row recipes-add-row"
       "recipes-list recipes-list";
+    margin-bottom: 2vmin;
     .recipes-add-row {
       grid-area: recipes-add-row;
       font-size: 3vmin;
@@ -241,7 +242,7 @@ export default {
         "label recipes-selector recipes-add-button";
       grid-template-columns: max-content auto 9%;
       align-items: center;
-      margin-bottom: 1vh;
+      margin-bottom: 1vmin;
       .label {
         grid-area: label;
         margin-right: 1vw;
@@ -283,7 +284,7 @@ export default {
         "label product-add";
       grid-template-columns: max-content auto;
       align-items: center;
-      margin-bottom: 1vh;
+      margin-bottom: 5vmin;
       .label {
         grid-area: label;
         margin-right: 1vw;
@@ -311,22 +312,22 @@ export default {
 // =================== Mobile ==================
 @media only screen and (max-width: 1000px) {
 .shopping-list-page {
-  display: grid;
-  grid-template-rows: 10vmin 7vmin auto auto;
-  grid-template-areas:
-    "title title"
-    "search search"
-    "product-add-row product-add-row"
-    "label label"
-    "product-list product-list"
-    "table table";
-  .product-add-row {
-    grid-template-areas:
-        "label"
-        "product-add";
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
-  }
+  // display: grid;
+  // grid-template-rows: 10vmin 7vmin auto auto;
+  // grid-template-areas:
+  //   "title title"
+  //   "search search"
+  //   "product-add-row product-add-row"
+  //   "label label"
+  //   "product-list product-list"
+  //   "table table";
+  // .product-add-row {
+  //   grid-template-areas:
+  //       "label"
+  //       "product-add";
+  //   grid-template-columns: 1fr;
+  //   grid-template-rows: auto auto;
+  // }
 }
 }
 </style>

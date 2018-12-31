@@ -46,13 +46,13 @@ export default {
       User: {},
       Product: {
         name: '',
-        category: '',
-        pricingUnit: '',
+        category: null,
+        pricingUnit: null,
         price: null
       },
-      unitOptions: ['pinch', 'tsp', 'tbsp', 'fl oz', 'cup', 'pt', 'qt', 'gal', 'oz', 'lb'],
+      unitOptions: ['each', 'box', 'bag', 'pinch', 'tsp', 'tbsp', 'fl oz', 'cup', 'pt', 'qt', 'gal', 'oz', 'lb'],
       categoryOptions: ['Produce', 'Meat', 'Seafood', 'Dairy', 'Bakery', 'Frozen Food', 'Beverages',
-        'Baking Goods', 'Packaged Goods', 'Condiments']
+        'Baking Goods', 'Packaged Goods', 'Condiments', 'Household Supplies']
       // currentUserId: this.$store.state.auth.user.id
     }
   },

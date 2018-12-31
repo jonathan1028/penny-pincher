@@ -58,7 +58,7 @@ export default {
   data () {
     return {
       query: [],
-      units: ['each', 'pinch', 'tsp', 'tbsp', 'fl oz', 'cup', 'pt', 'qt', 'gal', 'oz', 'lb'],
+      units: ['each', 'bag', 'box', 'pinch', 'tsp', 'tbsp', 'fl oz', 'cup', 'pt', 'qt', 'gal', 'oz', 'lb'],
       selectedUnit: null,
       format: null,
       price: null,
